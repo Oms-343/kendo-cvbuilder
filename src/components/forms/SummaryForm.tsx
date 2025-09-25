@@ -1,5 +1,5 @@
 import React from "react";
-import type { SummaryData } from "../CvBuilder";
+import type { SummaryData } from "../../types";
 
 interface SummaryFormProps {
   data: SummaryData;

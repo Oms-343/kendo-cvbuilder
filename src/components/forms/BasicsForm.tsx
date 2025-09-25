@@ -1,5 +1,5 @@
 import React from "react";
-import type { BasicsData } from "../CvBuilder";
+import type { BasicsData } from "../../types";
 
 interface BasicsFormProps {
   data: BasicsData;

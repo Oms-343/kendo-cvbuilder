@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { SkillsData } from "../CvBuilder";
+import type { SkillsData } from "../../types";
 
 interface SkillsFormProps {
   data: SkillsData;

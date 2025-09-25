@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { EducationItem } from "../CvBuilder";
+import type { EducationItem } from "../../types";
 
 interface EducationFormProps {
   data: EducationItem[];

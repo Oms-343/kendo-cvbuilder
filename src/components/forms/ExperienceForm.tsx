@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { ExperienceItem } from "../CvBuilder";
+import type { ExperienceItem } from "../../types";
 
 interface ExperienceFormProps {
   data: ExperienceItem[];

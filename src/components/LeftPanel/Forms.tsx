@@ -12,14 +12,8 @@ import type {
   EducationItem,
   ExperienceItem,
   SkillsData,
-} from "../CvBuilder";
-
-interface FormSection {
-  id: string;
-  title: string;
-  icon: string;
-  component: React.ComponentType<any>;
-}
+  FormSection,
+} from "../../types";
 
 interface LeftPanelProps {
   cvData: CvData;

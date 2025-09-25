@@ -1,11 +1,5 @@
 import React from "react";
-
-interface FormSection {
-  id: string;
-  title: string;
-  icon: string;
-  component: React.ComponentType;
-}
+import type { FormSection } from "../../types";
 
 interface SidebarNavigationProps {
   sections: FormSection[];

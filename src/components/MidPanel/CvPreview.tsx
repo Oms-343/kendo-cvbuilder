@@ -1,5 +1,5 @@
 import React from "react";
-import type { CvData } from "../CvBuilder";
+import type { CvData } from "../../types";
 
 interface CvPreviewProps {
   cvData: CvData;
