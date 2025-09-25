@@ -1,27 +1,57 @@
-import React, { useState } from "react";
-import { TextArea } from "@progress/kendo-react-inputs";
+import React from "react";
+import type { SummaryData } from "../CvBuilder";
 
-const SummaryForm: React.FC = () => {
-  const [summary, setSummary] = useState("");
+interface SummaryFormProps {
+  data: SummaryData;
+  onUpdate: (data: Partial<SummaryData>) => void;
+}
 
-  const handleSummaryChange = (event: any) => {
-    setSummary(event.target.value);
+const SummaryForm: React.FC<SummaryFormProps> = ({ data, onUpdate }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onUpdate({
+      content: event.target.value,
+    });
   };
 
   return (
-    <div className="summary-form">
-      <div className="form-row">
-        <label className="form-label">Professional Summary</label>
-        <TextArea
-          value={summary}
-          onChange={handleSummaryChange}
-          placeholder="A motivated and highly detail-oriented Business Data Analyst with 5+ years of experience in data analysis, process optimization and data visualization..."
-          rows={6}
-        />
-        <div className="form-hint">
-          Write a brief summary that highlights your key strengths and career
-          objectives.
-        </div>
+    <div style={{ padding: "20px" }}>
+      <label
+        style={{
+          display: "block",
+          fontSize: "16px",
+          fontWeight: "500",
+          marginBottom: "8px",
+          color: "#333",
+        }}
+      >
+        Professional Summary
+      </label>
+      <textarea
+        value={data.content}
+        onChange={handleChange}
+        placeholder="Write a brief professional summary highlighting your key achievements, skills, and career objectives..."
+        rows={6}
+        style={{
+          width: "100%",
+          padding: "12px",
+          border: "1px solid #e0e0e0",
+          borderRadius: "4px",
+          fontSize: "14px",
+          fontFamily: "inherit",
+          resize: "vertical",
+          boxSizing: "border-box",
+          lineHeight: "1.5",
+        }}
+      />
+      <div
+        style={{
+          fontSize: "12px",
+          color: "#666",
+          marginTop: "8px",
+        }}
+      >
+        Tip: Keep it concise (2-4 sentences) and focus on your most relevant
+        qualifications.
       </div>
     </div>
   );

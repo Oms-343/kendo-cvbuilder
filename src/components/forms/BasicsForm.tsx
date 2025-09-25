@@ -1,35 +1,16 @@
-import React, { useState } from "react";
-import { Input } from "@progress/kendo-react-inputs";
-import { Button } from "@progress/kendo-react-buttons";
+import React from "react";
+import type { BasicsData } from "../CvBuilder";
 
-interface BasicsFormData {
-  fullName: string;
-  headline: string;
-  email: string;
-  phone: string;
-  website: string;
-  linkedin: string;
-  location: string;
-  photo: string | null;
+interface BasicsFormProps {
+  data: BasicsData;
+  onUpdate: (data: Partial<BasicsData>) => void;
 }
 
-const BasicsForm: React.FC = () => {
-  const [formData, setFormData] = useState<BasicsFormData>({
-    fullName: "",
-    headline: "",
-    email: "",
-    phone: "",
-    website: "",
-    linkedin: "",
-    location: "",
-    photo: null,
-  });
-
-  const handleInputChange = (field: keyof BasicsFormData) => (event: any) => {
-    setFormData((prev) => ({
-      ...prev,
+const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
+  const handleInputChange = (field: keyof BasicsData) => (event: any) => {
+    onUpdate({
       [field]: event.target.value,
-    }));
+    });
   };
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,40 +18,86 @@ const BasicsForm: React.FC = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setFormData((prev) => ({
-          ...prev,
+        onUpdate({
           photo: e.target?.result as string,
-        }));
+        });
       };
       reader.readAsDataURL(file);
     }
   };
 
   return (
-    <div className="basics-form">
+    <div
+      style={{
+        width: "100%",
+      }}
+    >
       {/* Photo Upload Section */}
-      <div className="form-row">
-        <div className="photo-upload-section">
-          <div className="photo-container">
-            {formData.photo ? (
+      <div
+        style={{
+          marginBottom: "20px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "20px",
+            padding: "20px 0",
+          }}
+        >
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              borderRadius: "50%",
+              border: "2px dashed #e0e0e0",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#f8f9fa",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            {data.photo ? (
               <img
-                src={formData.photo}
+                src={data.photo}
                 alt="Profile"
-                className="profile-photo"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "50%",
+                }}
               />
             ) : (
-              <div className="photo-placeholder">
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "#666",
+                  fontSize: "12px",
+                  lineHeight: "1.2",
+                }}
+              >
                 <span>Upload Photo</span>
               </div>
             )}
           </div>
-          <Button
-            themeColor="primary"
-            size="small"
+          <button
+            style={{
+              padding: "6px 12px",
+              backgroundColor: "#1976d2",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontSize: "12px",
+            }}
             onClick={() => document.getElementById("photo-input")?.click()}
           >
             Choose Image
-          </Button>
+          </button>
           <input
             id="photo-input"
             type="file"
@@ -82,89 +109,296 @@ const BasicsForm: React.FC = () => {
       </div>
 
       {/* Full Name */}
-      <div className="form-row">
-        <label className="form-label required">
-          Full Name <span className="required-asterisk">*</span>
+      <div
+        style={{
+          marginBottom: "20px",
+        }}
+      >
+        <label
+          style={{
+            display: "block",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#333333",
+            marginBottom: "8px",
+            lineHeight: "1.4",
+          }}
+        >
+          Full Name{" "}
+          <span
+            style={{
+              color: "#d32f2f",
+              marginLeft: "2px",
+            }}
+          >
+            *
+          </span>
         </label>
-        <Input
-          value={formData.fullName}
+        <input
+          type="text"
+          value={data.fullName}
           onChange={handleInputChange("fullName")}
           placeholder="jason filler"
+          style={{
+            width: "100%",
+            padding: "8px 12px",
+            border: "1px solid #e0e0e0",
+            borderRadius: "4px",
+            fontSize: "14px",
+          }}
         />
       </div>
 
       {/* Headline */}
-      <div className="form-row">
-        <label className="form-label required">
-          Headline <span className="required-asterisk">*</span>
+      <div
+        style={{
+          marginBottom: "20px",
+        }}
+      >
+        <label
+          style={{
+            display: "block",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#333333",
+            marginBottom: "8px",
+            lineHeight: "1.4",
+          }}
+        >
+          Headline{" "}
+          <span
+            style={{
+              color: "#d32f2f",
+              marginLeft: "2px",
+            }}
+          >
+            *
+          </span>
         </label>
-        <Input
-          value={formData.headline}
+        <input
+          type="text"
+          value={data.headline}
           onChange={handleInputChange("headline")}
           placeholder="Senior Manager"
+          style={{
+            width: "100%",
+            padding: "8px 12px",
+            border: "1px solid #e0e0e0",
+            borderRadius: "4px",
+            fontSize: "14px",
+          }}
         />
       </div>
 
       {/* Email */}
-      <div className="form-row">
-        <label className="form-label required">
-          Email <span className="required-asterisk">*</span>
+      <div
+        style={{
+          marginBottom: "20px",
+        }}
+      >
+        <label
+          style={{
+            display: "block",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#333333",
+            marginBottom: "8px",
+            lineHeight: "1.4",
+          }}
+        >
+          Email{" "}
+          <span
+            style={{
+              color: "#d32f2f",
+              marginLeft: "2px",
+            }}
+          >
+            *
+          </span>
         </label>
-        <Input
-          value={formData.email}
+        <input
+          type="email"
+          value={data.email}
           onChange={handleInputChange("email")}
           placeholder="abcn@example.com"
-          type="email"
+          style={{
+            width: "100%",
+            padding: "8px 12px",
+            border: "1px solid #e0e0e0",
+            borderRadius: "4px",
+            fontSize: "14px",
+          }}
         />
       </div>
 
       {/* Phone */}
-      <div className="form-row">
-        <label className="form-label required">
-          Phone <span className="required-asterisk">*</span>
+      <div
+        style={{
+          marginBottom: "20px",
+        }}
+      >
+        <label
+          style={{
+            display: "block",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#333333",
+            marginBottom: "8px",
+            lineHeight: "1.4",
+          }}
+        >
+          Phone{" "}
+          <span
+            style={{
+              color: "#d32f2f",
+              marginLeft: "2px",
+            }}
+          >
+            *
+          </span>
         </label>
-        <Input
-          value={formData.phone}
+        <input
+          type="tel"
+          value={data.phone}
           onChange={handleInputChange("phone")}
           placeholder="+91 1234567890"
-          type="tel"
+          style={{
+            width: "100%",
+            padding: "8px 12px",
+            border: "1px solid #e0e0e0",
+            borderRadius: "4px",
+            fontSize: "14px",
+          }}
         />
       </div>
 
       {/* Website */}
-      <div className="form-row">
-        <label className="form-label">Website</label>
-        <div className="input-with-icon">
-          <Input
-            value={formData.website}
+      <div
+        style={{
+          marginBottom: "20px",
+        }}
+      >
+        <label
+          style={{
+            display: "block",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#333333",
+            marginBottom: "8px",
+            lineHeight: "1.4",
+          }}
+        >
+          Website
+        </label>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <input
+            type="url"
+            value={data.website}
             onChange={handleInputChange("website")}
             placeholder="https://example.com"
-            type="url"
+            style={{
+              width: "100%",
+              padding: "8px 12px",
+              paddingRight: "32px",
+              border: "1px solid #e0e0e0",
+              borderRadius: "4px",
+              fontSize: "14px",
+            }}
           />
-          <span className="input-icon">🔗</span>
+          <span
+            style={{
+              position: "absolute",
+              right: "12px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              fontSize: "16px",
+              color: "#666",
+              pointerEvents: "none",
+              zIndex: "1",
+            }}
+          >
+            🔗
+          </span>
         </div>
       </div>
 
       {/* LinkedIn */}
-      <div className="form-row">
-        <label className="form-label required">
-          LinkedIn <span className="required-asterisk">*</span>
+      <div
+        style={{
+          marginBottom: "20px",
+        }}
+      >
+        <label
+          style={{
+            display: "block",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#333333",
+            marginBottom: "8px",
+            lineHeight: "1.4",
+          }}
+        >
+          LinkedIn{" "}
+          <span
+            style={{
+              color: "#d32f2f",
+              marginLeft: "2px",
+            }}
+          >
+            *
+          </span>
         </label>
-        <Input
-          value={formData.linkedin}
+        <input
+          type="url"
+          value={data.linkedin}
           onChange={handleInputChange("linkedin")}
           placeholder="https://linkedin.com/in/username"
-          type="url"
+          style={{
+            width: "100%",
+            padding: "8px 12px",
+            border: "1px solid #e0e0e0",
+            borderRadius: "4px",
+            fontSize: "14px",
+          }}
         />
       </div>
 
       {/* Location */}
-      <div className="form-row">
-        <label className="form-label">Location</label>
-        <Input
-          value={formData.location}
+      <div
+        style={{
+          marginBottom: "20px",
+        }}
+      >
+        <label
+          style={{
+            display: "block",
+            fontSize: "14px",
+            fontWeight: "500",
+            color: "#333333",
+            marginBottom: "8px",
+            lineHeight: "1.4",
+          }}
+        >
+          Location
+        </label>
+        <input
+          type="text"
+          value={data.location}
           onChange={handleInputChange("location")}
           placeholder="City, State"
+          style={{
+            width: "100%",
+            padding: "8px 12px",
+            border: "1px solid #e0e0e0",
+            borderRadius: "4px",
+            fontSize: "14px",
+          }}
         />
       </div>
     </div>
