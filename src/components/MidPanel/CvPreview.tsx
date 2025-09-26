@@ -1,10 +1,5 @@
 import React from "react";
-import type { CvData } from "../../types";
-
-interface CvPreviewProps {
-  cvData: CvData;
-  template: string;
-}
+import type { CvPreviewProps } from "../../types";
 
 const CvPreview: React.FC<CvPreviewProps> = ({ cvData }) => {
   const { basics, summary, education, experience, skills } = cvData;

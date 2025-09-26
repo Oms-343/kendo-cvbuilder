@@ -1,11 +1,5 @@
 import React from "react";
-import type { FormSection } from "../../types";
-
-interface SidebarNavigationProps {
-  sections: FormSection[];
-  activeSection: string;
-  onSectionClick: (sectionId: string) => void;
-}
+import type { SidebarNavigationProps } from "../../types";
 
 const iconMap: Record<string, string> = {
   user: "👤",

@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import type { SkillsData } from "../../types";
-
-interface SkillsFormProps {
-  data: SkillsData;
-  onUpdate: (data: Partial<SkillsData>) => void;
-}
+import type { SkillsFormProps } from "../../types";
 
 const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
   const [newTechnicalSkill, setNewTechnicalSkill] = useState("");

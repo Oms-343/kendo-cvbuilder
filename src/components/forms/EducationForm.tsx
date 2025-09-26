@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import type { EducationItem } from "../../types";
-
-interface EducationFormProps {
-  data: EducationItem[];
-  onUpdate: (education: EducationItem[]) => void;
-}
+import type { EducationItem, EducationFormProps } from "../../types";
 
 const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
   const [newEducation, setNewEducation] = useState<Partial<EducationItem>>({

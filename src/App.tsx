@@ -11,10 +11,6 @@ function App() {
         <Route path="/cv-editor" element={<CvEditorPage />} />
         <Route path="/created-cvs" element={<CreatedCvsPage />} />
       </Routes>
-
-      <Link to="/">Landing</Link>
-      <Link to="/cv-editor">Cv Editor</Link>
-      <Link to="/created-cvs">Created Cvs</Link>
     </BrowserRouter>
   );
 }

@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import type { ExperienceItem } from "../../types";
-
-interface ExperienceFormProps {
-  data: ExperienceItem[];
-  onUpdate: (experience: ExperienceItem[]) => void;
-}
+import type { ExperienceItem, ExperienceFormProps } from "../../types";
 
 const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
   const [newExperience, setNewExperience] = useState<Partial<ExperienceItem>>({

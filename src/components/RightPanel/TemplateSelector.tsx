@@ -1,48 +1,6 @@
 import React from "react";
-
-interface TemplateSelectorProps {
-  selectedTemplate: string;
-  setSelectedTemplate: (template: string) => void;
-}
-
-const templates = [
-  {
-    id: "classic",
-    name: "Classic",
-    description:
-      "A simple single column layout for a straightforward presentation",
-  },
-  {
-    id: "modern",
-    name: "Modern",
-    description:
-      "A modern template with a clean and professional design with 2 columns.",
-  },
-  {
-    id: "clean",
-    name: "Clean",
-    description:
-      "A clean and professional design with a single column and table.",
-  },
-  {
-    id: "blue",
-    name: "Formal",
-    description:
-      "A single column layout with a clean and professional design blue color.",
-  },
-  {
-    id: "classicGrey",
-    name: "Corporate",
-    description:
-      "A single column layout with a clean and professional design grey color.",
-  },
-  {
-    id: "modernBlue",
-    name: "Professional",
-    description:
-      "A modern template with a clean and professional design green color.",
-  },
-];
+import type { TemplateSelectorProps } from "../../types";
+import { templates } from "../../types";
 
 const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   selectedTemplate,

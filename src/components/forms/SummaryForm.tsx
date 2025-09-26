@@ -1,10 +1,5 @@
 import React from "react";
-import type { SummaryData } from "../../types";
-
-interface SummaryFormProps {
-  data: SummaryData;
-  onUpdate: (data: Partial<SummaryData>) => void;
-}
+import type { SummaryFormProps } from "../../types";
 
 const SummaryForm: React.FC<SummaryFormProps> = ({ data, onUpdate }) => {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

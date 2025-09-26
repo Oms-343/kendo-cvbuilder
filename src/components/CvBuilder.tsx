@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Forms from "./LeftPanel/Forms";
+import SidebarNavigation from "./LeftPanel/SidebarNavigation";
 import CvPreview from "./MidPanel/CvPreview";
 import TemplateSelector from "./RightPanel/TemplateSelector";
 import type {
@@ -9,6 +10,7 @@ import type {
   ExperienceItem,
   SkillsData,
   CvData,
+  SidebarSection,
 } from "../types";
 
 const CvBuilder: React.FC = () => {
@@ -35,7 +37,39 @@ const CvBuilder: React.FC = () => {
     },
   });
 
-  const [selectedTemplate, setSelectedTemplate] = useState<string>("modern");
+  const [selectedTemplate, setSelectedTemplate] = useState<string>("classic");
+
+  // Form sections configuration for sidebar navigation
+  const formSections: SidebarSection[] = [
+    { id: "basics", title: "Basics", icon: "user" },
+    { id: "summary", title: "Summary", icon: "file-text" },
+    { id: "education", title: "Education", icon: "graduation-cap" },
+    { id: "experience", title: "Experience", icon: "briefcase" },
+    { id: "skills", title: "Skills", icon: "star" },
+  ];
+
+  // Active section state and refs
+  const [activeSection, setActiveSection] = useState("basics");
+  const formAreaRef = useRef<HTMLDivElement>(null);
+
+  // Refs for each form section
+  const formRefs = {
+    basics: useRef<HTMLDivElement>(null),
+    summary: useRef<HTMLDivElement>(null),
+    education: useRef<HTMLDivElement>(null),
+    experience: useRef<HTMLDivElement>(null),
+    skills: useRef<HTMLDivElement>(null),
+  };
+
+  const handleSectionClick = (sectionId: string) => {
+    setActiveSection(sectionId);
+
+    // Scroll to the section
+    const element = document.getElementById(`form-${sectionId}`);
+    if (element && formAreaRef.current) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   // Update functions for each section
   const updateBasics = (data: Partial<BasicsData>) => {
@@ -82,7 +116,7 @@ const CvBuilder: React.FC = () => {
         backgroundColor: "#f5f5f5",
       }}
     >
-      {/* Left Panel - Forms */}
+      {/* Left Panel - Sidebar + Forms */}
       <div
         style={{
           width: "400px",
@@ -92,17 +126,41 @@ const CvBuilder: React.FC = () => {
           boxShadow:
             "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
         }}
       >
-        <Forms
-          cvData={cvData}
-          updateBasics={updateBasics}
-          updateSummary={updateSummary}
-          updateEducation={updateEducation}
-          updateExperience={updateExperience}
-          updateSkills={updateSkills}
-        />
+        {/* Sidebar Navigation */}
+        <div
+          style={{
+            width: "60px",
+            backgroundColor: "#f8f9fa",
+            borderRight: "1px solid #e0e0e0",
+            display: "flex",
+            flexDirection: "column",
+            padding: "20px 0",
+            boxSizing: "border-box",
+          }}
+        >
+          <SidebarNavigation
+            sections={formSections}
+            activeSection={activeSection}
+            onSectionClick={handleSectionClick}
+          />
+        </div>
+
+        {/* Forms Area */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+          <Forms
+            cvData={cvData}
+            updateBasics={updateBasics}
+            updateSummary={updateSummary}
+            updateEducation={updateEducation}
+            updateExperience={updateExperience}
+            updateSkills={updateSkills}
+            formAreaRef={formAreaRef}
+            formRefs={formRefs}
+          />
+        </div>
       </div>
 
       {/* Middle Panel - CV Preview */}

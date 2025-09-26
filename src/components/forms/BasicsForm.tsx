@@ -1,10 +1,5 @@
 import React from "react";
-import type { BasicsData } from "../../types";
-
-interface BasicsFormProps {
-  data: BasicsData;
-  onUpdate: (data: Partial<BasicsData>) => void;
-}
+import type { BasicsData, BasicsFormProps } from "../../types";
 
 const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
   const handleInputChange = (field: keyof BasicsData) => (event: any) => {
