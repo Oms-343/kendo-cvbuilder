@@ -18,6 +18,65 @@ import type {
   SidebarSection,
 } from "../types";
 
+// CSS objects for cleaner code organization
+const mainContainerStyle: React.CSSProperties = {
+  height: "100vh",
+  width: "100%",
+  backgroundColor: "#f5f5f5",
+};
+
+const leftPaneContainerStyle: React.CSSProperties = {
+  display: "flex",
+  height: "100%",
+  backgroundColor: "#ffffff",
+};
+
+const formsColumnStyle: React.CSSProperties = {
+  height: "100%",
+  width: "100%",
+  overflowY: "auto",
+  borderRight: "1px solid #e5e5e5",
+  backgroundColor: "#ffffff",
+  boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+};
+
+const centerPaneStyle: React.CSSProperties = {
+  display: "flex",
+  height: "100%",
+  flexDirection: "column",
+  overflow: "hidden",
+  backgroundColor: "#f5f5f5",
+};
+
+const centerPaneInnerStyle: React.CSSProperties = {
+  display: "flex",
+  height: "100%",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  padding: "20px",
+  overflowY: "auto",
+};
+
+const cvPreviewContainerStyle: React.CSSProperties = {
+  width: "210mm",
+  minHeight: "297mm",
+  backgroundColor: "#ffffff",
+  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
+  margin: "0 auto",
+  borderRadius: "4px",
+  border: "1px solid #e5e5e5",
+  overflow: "hidden",
+};
+
+const rightPaneStyle: React.CSSProperties = {
+  height: "100%",
+  backgroundColor: "#ffffff",
+  borderLeft: "1px solid #e5e5e5",
+  boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  display: "flex",
+  flexDirection: "column",
+};
+
 const CvBuilder: React.FC = () => {
   // Main CV data state
   const [cvData, setCvData] = useState<CvData>({
@@ -140,13 +199,7 @@ const CvBuilder: React.FC = () => {
   };
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100%",
-        backgroundColor: "#f5f5f5", // bg-neutral-100
-      }}
-    >
+    <div style={mainContainerStyle}>
       <Splitter
         style={{ height: "100%" }}
         orientation="horizontal"
@@ -154,13 +207,7 @@ const CvBuilder: React.FC = () => {
         onChange={handleSplitterChange}
       >
         {/* Left pane: Sidebar Navigation + Forms */}
-        <div
-          style={{
-            display: "flex",
-            height: "100%",
-            backgroundColor: "#ffffff",
-          }}
-        >
+        <div style={leftPaneContainerStyle}>
           {/* Left sidebar with navigation */}
           <SidebarNavigation
             sections={formSections}
@@ -169,16 +216,7 @@ const CvBuilder: React.FC = () => {
           />
 
           {/* Forms column */}
-          <div
-            style={{
-              height: "100%",
-              width: "100%",
-              overflowY: "auto",
-              borderRight: "1px solid #e5e5e5", // border-neutral-200
-              backgroundColor: "#ffffff", // bg-white
-              boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)", // shadow-sm
-            }}
-          >
+          <div style={formsColumnStyle}>
             <Forms
               cvData={cvData}
               updateBasics={updateBasics}
@@ -193,54 +231,16 @@ const CvBuilder: React.FC = () => {
         </div>
 
         {/* Center pane: Resume preview (non-resizable, non-collapsible) */}
-        <div
-          style={{
-            display: "flex",
-            height: "100%",
-            flexDirection: "column",
-            overflow: "hidden",
-            backgroundColor: "#f5f5f5", // bg-neutral-100
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "flex-start",
-              padding: "20px",
-              overflowY: "auto",
-            }}
-          >
-            <div
-              style={{
-                width: "210mm",
-                minHeight: "297mm",
-                backgroundColor: "#ffffff",
-                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-                margin: "0 auto",
-                borderRadius: "4px",
-                border: "1px solid #e5e5e5",
-                overflow: "hidden",
-              }}
-            >
+        <div style={centerPaneStyle}>
+          <div style={centerPaneInnerStyle}>
+            <div style={cvPreviewContainerStyle}>
               <CvPreview cvData={cvData} template={selectedTemplate} />
             </div>
           </div>
         </div>
 
         {/* Right pane: Template selector (resizable + collapsible) */}
-        <div
-          style={{
-            height: "100%",
-            backgroundColor: "#ffffff",
-            borderLeft: "1px solid #e5e5e5",
-            boxShadow:
-              "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <div style={rightPaneStyle}>
           <TemplateSelector
             selectedTemplate={selectedTemplate}
             setSelectedTemplate={setSelectedTemplate}

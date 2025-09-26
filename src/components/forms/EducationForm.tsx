@@ -1,6 +1,87 @@
 import React, { useState } from "react";
 import type { EducationItem, EducationFormProps } from "../../types";
 
+// CSS objects for cleaner code organization
+const formContainerStyle: React.CSSProperties = {
+  padding: "20px",
+};
+
+const educationItemStyle: React.CSSProperties = {
+  border: "1px solid #e0e0e0",
+  borderRadius: "4px",
+  padding: "16px",
+  marginBottom: "16px",
+  backgroundColor: "#f9f9f9",
+};
+
+const educationItemHeaderStyle: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+};
+
+const educationTitleStyle: React.CSSProperties = {
+  margin: "0 0 8px 0",
+  fontSize: "16px",
+  fontWeight: "500",
+};
+
+const educationInstitutionStyle: React.CSSProperties = {
+  margin: "0 0 4px 0",
+  color: "#666",
+};
+
+const educationDetailsStyle: React.CSSProperties = {
+  margin: "0",
+  color: "#666",
+  fontSize: "14px",
+};
+
+const removeButtonStyle: React.CSSProperties = {
+  background: "none",
+  border: "none",
+  color: "#e74c3c",
+  cursor: "pointer",
+  fontSize: "18px",
+};
+
+const addEducationSectionStyle: React.CSSProperties = {
+  border: "2px dashed #e0e0e0",
+  borderRadius: "4px",
+  padding: "20px",
+  backgroundColor: "#fafafa",
+};
+
+const addEducationTitleStyle: React.CSSProperties = {
+  margin: "0 0 16px 0",
+  fontSize: "16px",
+  fontWeight: "500",
+};
+
+const addEducationGridStyle: React.CSSProperties = {
+  display: "grid",
+  gap: "16px",
+  gridTemplateColumns: "1fr 1fr",
+};
+
+const inputStyle: React.CSSProperties = {
+  padding: "8px 12px",
+  border: "1px solid #e0e0e0",
+  borderRadius: "4px",
+  fontSize: "14px",
+};
+
+const addButtonStyle: React.CSSProperties = {
+  marginTop: "16px",
+  padding: "8px 16px",
+  backgroundColor: "#1976d2",
+  color: "white",
+  border: "none",
+  borderRadius: "4px",
+  cursor: "pointer",
+  fontSize: "14px",
+};
+
 const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
   const [newEducation, setNewEducation] = useState<Partial<EducationItem>>({
     course: "",
@@ -28,52 +109,21 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={formContainerStyle}>
       {/* Existing Education Items */}
       {data.map((education) => (
-        <div
-          key={education.id}
-          style={{
-            border: "1px solid #e0e0e0",
-            borderRadius: "4px",
-            padding: "16px",
-            marginBottom: "16px",
-            backgroundColor: "#f9f9f9",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-            }}
-          >
+        <div key={education.id} style={educationItemStyle}>
+          <div style={educationItemHeaderStyle}>
             <div>
-              <h4
-                style={{
-                  margin: "0 0 8px 0",
-                  fontSize: "16px",
-                  fontWeight: "500",
-                }}
-              >
-                {education.course}
-              </h4>
-              <p style={{ margin: "0 0 4px 0", color: "#666" }}>
-                {education.institution}
-              </p>
-              <p style={{ margin: "0", color: "#666", fontSize: "14px" }}>
+              <h4 style={educationTitleStyle}>{education.course}</h4>
+              <p style={educationInstitutionStyle}>{education.institution}</p>
+              <p style={educationDetailsStyle}>
                 {education.year} {education.score && `• ${education.score}`}
               </p>
             </div>
             <button
               onClick={() => handleRemoveEducation(education.id)}
-              style={{
-                background: "none",
-                border: "none",
-                color: "#e74c3c",
-                cursor: "pointer",
-                fontSize: "18px",
-              }}
+              style={removeButtonStyle}
             >
               ×
             </button>
@@ -82,26 +132,9 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
       ))}
 
       {/* Add New Education Form */}
-      <div
-        style={{
-          border: "2px dashed #e0e0e0",
-          borderRadius: "4px",
-          padding: "20px",
-          backgroundColor: "#fafafa",
-        }}
-      >
-        <h4
-          style={{ margin: "0 0 16px 0", fontSize: "16px", fontWeight: "500" }}
-        >
-          Add Education
-        </h4>
-        <div
-          style={{
-            display: "grid",
-            gap: "16px",
-            gridTemplateColumns: "1fr 1fr",
-          }}
-        >
+      <div style={addEducationSectionStyle}>
+        <h4 style={addEducationTitleStyle}>Add Education</h4>
+        <div style={addEducationGridStyle}>
           <input
             type="text"
             placeholder="Course/Degree"
@@ -109,12 +142,7 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
             onChange={(e) =>
               setNewEducation({ ...newEducation, course: e.target.value })
             }
-            style={{
-              padding: "8px 12px",
-              border: "1px solid #e0e0e0",
-              borderRadius: "4px",
-              fontSize: "14px",
-            }}
+            style={inputStyle}
           />
           <input
             type="text"
@@ -123,12 +151,7 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
             onChange={(e) =>
               setNewEducation({ ...newEducation, institution: e.target.value })
             }
-            style={{
-              padding: "8px 12px",
-              border: "1px solid #e0e0e0",
-              borderRadius: "4px",
-              fontSize: "14px",
-            }}
+            style={inputStyle}
           />
           <input
             type="text"
@@ -137,12 +160,7 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
             onChange={(e) =>
               setNewEducation({ ...newEducation, year: e.target.value })
             }
-            style={{
-              padding: "8px 12px",
-              border: "1px solid #e0e0e0",
-              borderRadius: "4px",
-              fontSize: "14px",
-            }}
+            style={inputStyle}
           />
           <input
             type="text"
@@ -151,27 +169,10 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
             onChange={(e) =>
               setNewEducation({ ...newEducation, score: e.target.value })
             }
-            style={{
-              padding: "8px 12px",
-              border: "1px solid #e0e0e0",
-              borderRadius: "4px",
-              fontSize: "14px",
-            }}
+            style={inputStyle}
           />
         </div>
-        <button
-          onClick={handleAddEducation}
-          style={{
-            marginTop: "16px",
-            padding: "8px 16px",
-            backgroundColor: "#1976d2",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-            fontSize: "14px",
-          }}
-        >
+        <button onClick={handleAddEducation} style={addButtonStyle}>
           Add Education
         </button>
       </div>
