@@ -2,3 +2,9 @@
  * All CSS styles have been moved inline to React components.
  * This file is now empty to maintain the native HTML/CSS approach.
  */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

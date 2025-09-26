@@ -113,65 +113,47 @@ const CvBuilder: React.FC = () => {
         display: "flex",
         height: "100vh",
         width: "100%",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#f5f5f5", // bg-neutral-100
       }}
     >
-      {/* Left Panel - Sidebar + Forms */}
+      {/* Left sidebar with navigation */}
+      <SidebarNavigation
+        sections={formSections}
+        activeSection={activeSection}
+        onSectionClick={handleSectionClick}
+      />
+
+      {/* Forms column */}
       <div
         style={{
-          width: "400px",
           height: "100%",
-          backgroundColor: "#ffffff",
-          borderRight: "1px solid #e5e5e5",
-          boxShadow:
-            "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-          display: "flex",
-          flexDirection: "row",
+          width: "100%",
+          overflowY: "auto",
+          borderRight: "1px solid #e5e5e5", // border-neutral-200
+          backgroundColor: "#ffffff", // bg-white
+          boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)", // shadow-sm
         }}
       >
-        {/* Sidebar Navigation */}
-        <div
-          style={{
-            width: "60px",
-            backgroundColor: "#f8f9fa",
-            borderRight: "1px solid #e0e0e0",
-            display: "flex",
-            flexDirection: "column",
-            padding: "20px 0",
-            boxSizing: "border-box",
-          }}
-        >
-          <SidebarNavigation
-            sections={formSections}
-            activeSection={activeSection}
-            onSectionClick={handleSectionClick}
-          />
-        </div>
-
-        {/* Forms Area */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          <Forms
-            cvData={cvData}
-            updateBasics={updateBasics}
-            updateSummary={updateSummary}
-            updateEducation={updateEducation}
-            updateExperience={updateExperience}
-            updateSkills={updateSkills}
-            formAreaRef={formAreaRef}
-            formRefs={formRefs}
-          />
-        </div>
+        <Forms
+          cvData={cvData}
+          updateBasics={updateBasics}
+          updateSummary={updateSummary}
+          updateEducation={updateEducation}
+          updateExperience={updateExperience}
+          updateSkills={updateSkills}
+          formAreaRef={formAreaRef}
+          formRefs={formRefs}
+        />
       </div>
 
-      {/* Middle Panel - CV Preview */}
+      {/* Resume preview column (middle) */}
       <div
         style={{
-          flex: 1,
-          height: "100%",
-          backgroundColor: "#f5f5f5",
           display: "flex",
+          height: "100%",
           flexDirection: "column",
           overflow: "hidden",
+          backgroundColor: "#f5f5f5", // bg-neutral-100
         }}
       >
         <div
@@ -201,11 +183,11 @@ const CvBuilder: React.FC = () => {
         </div>
       </div>
 
-      {/* Right Panel - Template Selector */}
+      {/* Template selector column (right) */}
       <div
         style={{
+          height: "100vh",
           width: "300px",
-          height: "100%",
           backgroundColor: "#ffffff",
           borderLeft: "1px solid #e5e5e5",
           boxShadow:

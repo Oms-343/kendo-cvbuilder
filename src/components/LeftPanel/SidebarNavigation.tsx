@@ -25,11 +25,17 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
   return (
     <div
       style={{
+        height: "100vh",
+        width: "80px",
+        backgroundColor: "#fafafa", // bg-zinc-50
+        borderRight: "2px solid #e5e5e5", // border-r-2
+        fontFamily: "system-ui, -apple-system, sans-serif",
+        transition: "width 300ms ease-in-out",
         display: "flex",
         flexDirection: "column",
+        padding: "20px 0",
+        alignItems: "center",
         gap: "8px",
-        padding: "0 10px",
-        width: "100%",
       }}
     >
       {sections.map((section) => (
@@ -39,6 +45,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
             position: "relative",
             display: "flex",
             justifyContent: "center",
+            width: "100%",
           }}
         >
           <button
@@ -95,10 +102,12 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
               {iconMap[section.icon] || "📋"}
             </span>
           </button>
+
+          {/* Tooltip */}
           <div
             style={{
               position: "absolute",
-              left: "50px",
+              left: "90px",
               top: "50%",
               transform: "translateY(-50%)",
               backgroundColor: "#333",
