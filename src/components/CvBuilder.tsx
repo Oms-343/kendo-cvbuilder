@@ -1,4 +1,9 @@
 import React, { useState, useRef } from "react";
+import { Splitter } from "@progress/kendo-react-layout";
+import type {
+  SplitterOnChangeEvent,
+  SplitterPaneProps,
+} from "@progress/kendo-react-layout";
 import Forms from "./LeftPanel/Forms";
 import SidebarNavigation from "./LeftPanel/SidebarNavigation";
 import CvPreview from "./MidPanel/CvPreview";
@@ -38,6 +43,33 @@ const CvBuilder: React.FC = () => {
   });
 
   const [selectedTemplate, setSelectedTemplate] = useState<string>("classic");
+
+  // Splitter panes state
+  const [panes, setPanes] = useState<SplitterPaneProps[]>([
+    {
+      size: "350px",
+      min: "200px",
+      max: "500px",
+      collapsible: true,
+      resizable: true,
+    },
+    {
+      resizable: false,
+      collapsible: false,
+    },
+    {
+      size: "250px",
+      min: "250px",
+      max: "400px",
+      // collapsible: true,
+      // resizable: true,
+    },
+  ]);
+
+  // Splitter onChange handler
+  const handleSplitterChange = (event: SplitterOnChangeEvent) => {
+    setPanes(event.newState);
+  };
 
   // Form sections configuration for sidebar navigation
   const formSections: SidebarSection[] = [
@@ -110,97 +142,111 @@ const CvBuilder: React.FC = () => {
   return (
     <div
       style={{
-        display: "flex",
         height: "100vh",
         width: "100%",
         backgroundColor: "#f5f5f5", // bg-neutral-100
       }}
     >
-      {/* Left sidebar with navigation */}
-      <SidebarNavigation
-        sections={formSections}
-        activeSection={activeSection}
-        onSectionClick={handleSectionClick}
-      />
-
-      {/* Forms column */}
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          overflowY: "auto",
-          borderRight: "1px solid #e5e5e5", // border-neutral-200
-          backgroundColor: "#ffffff", // bg-white
-          boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)", // shadow-sm
-        }}
+      <Splitter
+        style={{ height: "100%" }}
+        orientation="horizontal"
+        panes={panes}
+        onChange={handleSplitterChange}
       >
-        <Forms
-          cvData={cvData}
-          updateBasics={updateBasics}
-          updateSummary={updateSummary}
-          updateEducation={updateEducation}
-          updateExperience={updateExperience}
-          updateSkills={updateSkills}
-          formAreaRef={formAreaRef}
-          formRefs={formRefs}
-        />
-      </div>
-
-      {/* Resume preview column (middle) */}
-      <div
-        style={{
-          display: "flex",
-          height: "100%",
-          flexDirection: "column",
-          overflow: "hidden",
-          backgroundColor: "#f5f5f5", // bg-neutral-100
-        }}
-      >
+        {/* Left pane: Sidebar Navigation + Forms */}
         <div
           style={{
             display: "flex",
             height: "100%",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            padding: "20px",
-            overflowY: "auto",
+            backgroundColor: "#ffffff",
+          }}
+        >
+          {/* Left sidebar with navigation */}
+          <SidebarNavigation
+            sections={formSections}
+            activeSection={activeSection}
+            onSectionClick={handleSectionClick}
+          />
+
+          {/* Forms column */}
+          <div
+            style={{
+              height: "100%",
+              width: "100%",
+              overflowY: "auto",
+              borderRight: "1px solid #e5e5e5", // border-neutral-200
+              backgroundColor: "#ffffff", // bg-white
+              boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)", // shadow-sm
+            }}
+          >
+            <Forms
+              cvData={cvData}
+              updateBasics={updateBasics}
+              updateSummary={updateSummary}
+              updateEducation={updateEducation}
+              updateExperience={updateExperience}
+              updateSkills={updateSkills}
+              formAreaRef={formAreaRef}
+              formRefs={formRefs}
+            />
+          </div>
+        </div>
+
+        {/* Center pane: Resume preview (non-resizable, non-collapsible) */}
+        <div
+          style={{
+            display: "flex",
+            height: "100%",
+            flexDirection: "column",
+            overflow: "hidden",
+            backgroundColor: "#f5f5f5", // bg-neutral-100
           }}
         >
           <div
             style={{
-              width: "210mm",
-              minHeight: "297mm",
-              backgroundColor: "#ffffff",
-              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-              margin: "0 auto",
-              borderRadius: "4px",
-              border: "1px solid #e5e5e5",
-              overflow: "hidden",
+              display: "flex",
+              height: "100%",
+              justifyContent: "center",
+              alignItems: "flex-start",
+              padding: "20px",
+              overflowY: "auto",
             }}
           >
-            <CvPreview cvData={cvData} template={selectedTemplate} />
+            <div
+              style={{
+                width: "210mm",
+                minHeight: "297mm",
+                backgroundColor: "#ffffff",
+                boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
+                margin: "0 auto",
+                borderRadius: "4px",
+                border: "1px solid #e5e5e5",
+                overflow: "hidden",
+              }}
+            >
+              <CvPreview cvData={cvData} template={selectedTemplate} />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Template selector column (right) */}
-      <div
-        style={{
-          height: "100vh",
-          width: "300px",
-          backgroundColor: "#ffffff",
-          borderLeft: "1px solid #e5e5e5",
-          boxShadow:
-            "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <TemplateSelector
-          selectedTemplate={selectedTemplate}
-          setSelectedTemplate={setSelectedTemplate}
-        />
-      </div>
+        {/* Right pane: Template selector (resizable + collapsible) */}
+        <div
+          style={{
+            height: "100%",
+            backgroundColor: "#ffffff",
+            borderLeft: "1px solid #e5e5e5",
+            boxShadow:
+              "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <TemplateSelector
+            selectedTemplate={selectedTemplate}
+            setSelectedTemplate={setSelectedTemplate}
+          />
+        </div>
+      </Splitter>
     </div>
   );
 };
