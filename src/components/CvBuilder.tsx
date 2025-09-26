@@ -47,11 +47,11 @@ const CvBuilder: React.FC = () => {
   // Splitter panes state
   const [panes, setPanes] = useState<SplitterPaneProps[]>([
     {
-      size: "350px",
+      size: "450px",
       min: "200px",
       max: "500px",
-      collapsible: true,
-      resizable: true,
+      // collapsible: true,
+      // resizable: true,
     },
     {
       resizable: false,
