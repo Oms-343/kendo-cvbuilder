@@ -43,9 +43,9 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
       </div>
 
       <div
+        className="scrollable-area"
         style={{
           flex: 1,
-          overflowY: "auto",
           padding: "20px",
         }}
       >

@@ -8,3 +8,46 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Custom Scrollbar Styles - Hide scrollbars for clean appearance */
+* {
+  /* Firefox */
+  scrollbar-width: none;
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+/* Specific classes for scrollable areas */
+.scrollable-area {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.scrollable-area::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.scrollable-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable-area::-webkit-scrollbar-thumb {
+  background: transparent;
+}

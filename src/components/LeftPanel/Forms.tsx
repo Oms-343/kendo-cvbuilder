@@ -27,10 +27,10 @@ const Forms: React.FC<FormsProps> = ({
   return (
     <div
       ref={formAreaRef}
+      className="scrollable-area"
       style={{
         width: "100%",
         height: "100%",
-        overflowY: "auto",
       }}
     >
       {formSections.map((section) => {
