@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import SidebarNavigation from "./SidebarNavigation";
-import BasicsForm from "../forms/BasicsForm";
-import SummaryForm from "../forms/SummaryForm";
-import EducationForm from "../forms/EducationForm";
-import ExperienceForm from "../forms/ExperienceForm";
-import SkillsForm from "../forms/SkillsForm";
+import BasicsForm from "../Forms/BasicsForm";
+import SummaryForm from "../Forms/SummaryForm";
+import EducationForm from "../Forms/EducationForm";
+import ExperienceForm from "../Forms/ExperienceForm";
+import SkillsForm from "../Forms/SkillsForm";
 import type {
   CvData,
   BasicsData,
@@ -15,7 +15,7 @@ import type {
   FormSection,
 } from "../../types";
 
-interface LeftPanelProps {
+interface FormsProps {
   cvData: CvData;
   updateBasics: (data: Partial<BasicsData>) => void;
   updateSummary: (data: Partial<SummaryData>) => void;
@@ -24,7 +24,7 @@ interface LeftPanelProps {
   updateSkills: (data: Partial<SkillsData>) => void;
 }
 
-const LeftPanel: React.FC<LeftPanelProps> = ({
+const Forms: React.FC<FormsProps> = ({
   cvData,
   updateBasics,
   updateSummary,
@@ -202,4 +202,4 @@ const LeftPanel: React.FC<LeftPanelProps> = ({
   );
 };
 
-export default LeftPanel;
+export default Forms;

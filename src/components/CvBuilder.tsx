@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import LeftPanel from "./LeftPanel/Forms";
+import Forms from "./LeftPanel/Forms";
 import CvPreview from "./MidPanel/CvPreview";
+import TemplateSelector from "./RightPanel/TemplateSelector";
 import type {
   BasicsData,
   SummaryData,
@@ -94,7 +95,7 @@ const CvBuilder: React.FC = () => {
           flexDirection: "column",
         }}
       >
-        <LeftPanel
+        <Forms
           cvData={cvData}
           updateBasics={updateBasics}
           updateSummary={updateSummary}
@@ -155,90 +156,10 @@ const CvBuilder: React.FC = () => {
           flexDirection: "column",
         }}
       >
-        <div
-          style={{
-            padding: "20px",
-            borderBottom: "1px solid #e5e5e5",
-          }}
-        >
-          <h3
-            style={{
-              margin: "0",
-              fontSize: "18px",
-              fontWeight: "600",
-              color: "#333",
-            }}
-          >
-            Template Selector
-          </h3>
-          <p
-            style={{
-              margin: "8px 0 0 0",
-              fontSize: "14px",
-              color: "#666",
-            }}
-          >
-            Choose a design for your resume
-          </p>
-        </div>
-        <div
-          style={{
-            flex: 1,
-            padding: "20px",
-            overflowY: "auto",
-          }}
-        >
-          {/* Template options */}
-          <div
-            style={{
-              display: "grid",
-              gap: "16px",
-            }}
-          >
-            {["modern", "classic", "professional", "creative"].map(
-              (template) => (
-                <div
-                  key={template}
-                  onClick={() => setSelectedTemplate(template)}
-                  style={{
-                    padding: "16px",
-                    border: `2px solid ${
-                      selectedTemplate === template ? "#1976d2" : "#e5e5e5"
-                    }`,
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    backgroundColor:
-                      selectedTemplate === template ? "#f3f8ff" : "#ffffff",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontWeight: "500",
-                      fontSize: "14px",
-                      color: selectedTemplate === template ? "#1976d2" : "#333",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {template}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "12px",
-                      color: "#666",
-                      marginTop: "4px",
-                    }}
-                  >
-                    {template === "modern" && "Clean and modern design"}
-                    {template === "classic" && "Traditional professional look"}
-                    {template === "professional" && "Business-focused layout"}
-                    {template === "creative" && "Creative and colorful design"}
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-        </div>
+        <TemplateSelector
+          selectedTemplate={selectedTemplate}
+          setSelectedTemplate={setSelectedTemplate}
+        />
       </div>
     </div>
   );
