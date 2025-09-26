@@ -33,7 +33,7 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
         transition: "width 300ms ease-in-out",
         display: "flex",
         flexDirection: "column",
-        padding: "20px 0",
+        padding: "20px 10px",
         alignItems: "center",
         gap: "8px",
       }}
