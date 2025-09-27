@@ -1,10 +1,8 @@
 import React from "react";
+import { Editor, EditorTools } from "@progress/kendo-react-editor";
 import type { SummaryFormProps } from "../../types";
 
 // CSS objects for cleaner code organization
-const formContainerStyle: React.CSSProperties = {
-  padding: "20px",
-};
 
 const labelStyle: React.CSSProperties = {
   display: "block",
@@ -14,18 +12,6 @@ const labelStyle: React.CSSProperties = {
   color: "#333",
 };
 
-const textareaStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "12px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-  fontFamily: "inherit",
-  resize: "vertical",
-  boxSizing: "border-box",
-  lineHeight: "1.5",
-};
-
 const tipStyle: React.CSSProperties = {
   fontSize: "12px",
   color: "#666",
@@ -33,21 +19,23 @@ const tipStyle: React.CSSProperties = {
 };
 
 const SummaryForm: React.FC<SummaryFormProps> = ({ data, onUpdate }) => {
-  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (event: any) => {
     onUpdate({
-      content: event.target.value,
+      content: event.html || "",
     });
   };
 
   return (
-    <div style={formContainerStyle}>
+    <div>
       <label style={labelStyle}>Professional Summary</label>
-      <textarea
+      <Editor
         value={data.content}
         onChange={handleChange}
-        placeholder="Write a brief professional summary highlighting your key achievements, skills, and career objectives..."
-        rows={6}
-        style={textareaStyle}
+        tools={[
+          [EditorTools.Bold, EditorTools.Italic, EditorTools.Underline],
+          [EditorTools.UnorderedList, EditorTools.OrderedList],
+          [EditorTools.Link, EditorTools.Unlink],
+        ]}
       />
       <div style={tipStyle}>
         Tip: Keep it concise (2-4 sentences) and focus on your most relevant

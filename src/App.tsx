@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import LandingPage from "./pages/LandingPage";
 import CvEditorPage from "./pages/CvEditorPage";
 import CreatedCvsPage from "./pages/CreatedCvsPage";
