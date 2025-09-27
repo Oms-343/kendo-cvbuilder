@@ -1,9 +1,5 @@
 import React from "react";
-import type { CvData } from "../../../types";
-
-interface ModernTemplateProps {
-  cvData: CvData;
-}
+import type { ModernTemplateProps } from "../../../types";
 
 const ModernTemplate: React.FC<ModernTemplateProps> = ({ cvData }) => {
   const { basics, summary, education, experience, skills } = cvData;

@@ -119,6 +119,11 @@ export interface CvPreviewProps {
   template: string;
 }
 
+export interface PdfGeneratorProps {
+  cvData: CvData;
+  template: string;
+}
+
 // Template definitions
 export interface Template {
   id: string;
@@ -126,9 +131,12 @@ export interface Template {
   description: string;
 }
 
-export interface PdfGeneratorProps {
+export interface ClassicTemplateProps {
   cvData: CvData;
-  template: string;
+}
+
+export interface ModernTemplateProps {
+  cvData: CvData;
 }
 
 export const templates: Template[] = [

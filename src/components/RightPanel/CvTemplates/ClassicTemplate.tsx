@@ -1,9 +1,5 @@
 import React from "react";
-import type { CvData } from "../../../types";
-
-interface ClassicTemplateProps {
-  cvData: CvData;
-}
+import type { ClassicTemplateProps } from "../../../types";
 
 const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
   const { basics, summary, education, experience, skills } = cvData;
