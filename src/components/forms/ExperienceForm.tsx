@@ -37,25 +37,7 @@ const experienceCompanyStyle: React.CSSProperties = {
   fontWeight: "500",
 };
 
-const experienceDetailsStyle: React.CSSProperties = {
-  margin: "2px 0",
-  color: "#777",
-  fontSize: "13px",
-};
 
-const experienceDateStyle: React.CSSProperties = {
-  margin: "4px 0 0 0",
-  color: "#666",
-  fontSize: "13px",
-  fontWeight: "500",
-};
-
-const experienceDescriptionStyle: React.CSSProperties = {
-  margin: "8px 0 0 0",
-  fontSize: "14px",
-  lineHeight: "1.5",
-  color: "#555",
-};
 
 const removeButtonStyle: React.CSSProperties = {
   background: "none",
