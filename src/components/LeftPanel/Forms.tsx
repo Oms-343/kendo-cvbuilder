@@ -21,6 +21,7 @@ const headerStyle: React.CSSProperties = {
 
 const contentStyle: React.CSSProperties = {
   padding: "24px",
+  paddingBottom: "40px",
   backgroundColor: "#ffffff",
 };
 

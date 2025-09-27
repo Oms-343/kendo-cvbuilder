@@ -8,13 +8,16 @@ const formContainerStyle: React.CSSProperties = {
 
 const photoUploadSectionStyle: React.CSSProperties = {
   marginBottom: "20px",
+  display: "flex",
 };
 
 const photoUploadContainerStyle: React.CSSProperties = {
   display: "flex",
-  alignItems: "center",
+  flexDirection: "column",
+  alignItems: "start",
   gap: "20px",
   padding: "20px 0",
+  paddingTop: "0",
 };
 
 const photoPlaceholderStyle: React.CSSProperties = {
@@ -158,34 +161,34 @@ const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
             onChange={handlePhotoUpload}
           />
         </div>
-      </div>
-
-      {/* Full Name */}
-      <div style={formFieldStyle}>
-        <label style={labelStyle}>
-          Full Name <span style={requiredAsteriskStyle}>*</span>
-        </label>
-        <input
-          type="text"
-          value={data.fullName}
-          onChange={handleInputChange("fullName")}
-          placeholder="jason filler"
-          style={inputStyle}
-        />
-      </div>
-
-      {/* Headline */}
-      <div style={formFieldStyle}>
-        <label style={labelStyle}>
-          Headline <span style={requiredAsteriskStyle}>*</span>
-        </label>
-        <input
-          type="text"
-          value={data.headline}
-          onChange={handleInputChange("headline")}
-          placeholder="Senior Manager"
-          style={inputStyle}
-        />
+        {/* Full Name */}
+        <div>
+          <div style={formFieldStyle}>
+            <label style={labelStyle}>
+              Full Name <span style={requiredAsteriskStyle}>*</span>
+            </label>
+            <input
+              type="text"
+              value={data.fullName}
+              onChange={handleInputChange("fullName")}
+              placeholder="jason filler"
+              style={inputStyle}
+            />
+          </div>
+          {/* Headline */}
+          <div style={formFieldStyle}>
+            <label style={labelStyle}>
+              Headline <span style={requiredAsteriskStyle}>*</span>
+            </label>
+            <input
+              type="text"
+              value={data.headline}
+              onChange={handleInputChange("headline")}
+              placeholder="Senior Manager"
+              style={inputStyle}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Email */}
