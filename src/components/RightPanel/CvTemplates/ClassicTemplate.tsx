@@ -7,26 +7,6 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
 
   // Styles - Classic Professional Template
   const styles = {
-    container: {
-      fontSize: "14px",
-      lineHeight: 1.5,
-      color: "#333",
-      background: "#fff",
-      maxWidth: "800px",
-      margin: "0 auto",
-      padding: "20px",
-      fontFamily:
-        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-      minHeight: "297mm", // A4 height
-    } as React.CSSProperties,
-
-    header: {
-      display: "flex",
-      marginBottom: "30px",
-      gap: "20px",
-      alignItems: "flex-start",
-    } as React.CSSProperties,
-
     profileImageContainer: {
       display: "flex",
       justifyContent: "center",
@@ -44,88 +24,101 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
       border: "3px solid #f0f0f0",
     } as React.CSSProperties,
 
+    container: {
+      fontSize: "14px",
+      lineHeight: 1.5,
+      color: "#333",
+      background: "#fff",
+      maxWidth: "800px",
+      margin: "0 auto",
+      padding: "20px",
+      fontFamily:
+        'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      minHeight: "297mm", // A4 height
+    } as React.CSSProperties,
+
+    header: {
+      display: "flex",
+      marginBottom: "10px",
+      gap: "15px",
+    } as React.CSSProperties,
+
     headerInfo: {
       flex: 1,
     } as React.CSSProperties,
 
     name: {
-      fontSize: "32px",
+      fontSize: "26px",
       fontWeight: 700,
       color: "#1a1a1a",
-      lineHeight: 1.2,
-      marginBottom: "8px",
-      margin: 0,
+      lineHeight: "normal",
+      marginBottom: "2px",
     } as React.CSSProperties,
 
     headline: {
-      fontSize: "18px",
+      fontSize: "16px",
       color: "#666",
-      lineHeight: 1.3,
-      marginBottom: "20px",
-      fontWeight: 400,
-      margin: "8px 0 20px 0",
+      lineHeight: "normal",
+      marginBottom: "10px",
+      fontWeight: 500,
     } as React.CSSProperties,
 
     contactInfo: {
       display: "flex",
       flexWrap: "wrap" as const,
       alignItems: "center",
-      gap: "20px",
-      fontSize: "14px",
+      gap: "15px",
+      fontSize: "12px",
       color: "#333",
     } as React.CSSProperties,
 
     contactItem: {
       display: "flex",
       alignItems: "center",
-      gap: "6px",
+      gap: "3px",
     } as React.CSSProperties,
 
     section: {
-      marginBottom: "30px",
+      marginBottom: "10px",
     } as React.CSSProperties,
 
     sectionTitle: {
-      fontSize: "16px",
+      fontSize: "14px",
       fontWeight: 700,
       textTransform: "uppercase" as const,
-      marginBottom: "15px",
-      borderBottom: "2px solid #333",
+      marginBottom: "5px",
+      borderBottom: "1px solid #333",
       paddingBottom: "5px",
       color: "#1a1a1a",
-      letterSpacing: "0.5px",
     } as React.CSSProperties,
 
     summaryContent: {
-      fontSize: "15px",
+      fontSize: "12px",
       lineHeight: 1.6,
       color: "#444",
       textAlign: "justify" as const,
     } as React.CSSProperties,
 
     experienceItem: {
-      marginBottom: "25px",
+      marginBottom: "5px",
     } as React.CSSProperties,
 
     experienceHeader: {
-      marginBottom: "8px",
+      marginBottom: "2px",
     } as React.CSSProperties,
 
     experienceTitleAndDuration: {
       display: "flex",
       justifyContent: "space-between",
-      alignItems: "flex-start",
-      marginBottom: "4px",
     } as React.CSSProperties,
 
     experiencePosition: {
-      fontSize: "16px",
+      fontSize: "13px",
       fontWeight: "bold",
       color: "#1a1a1a",
-      margin: 0,
     } as React.CSSProperties,
 
-    experienceCompanyAndLocation: {
+    experienceCompanyLocation: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
@@ -133,40 +126,39 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
     } as React.CSSProperties,
 
     experienceCompany: {
-      fontSize: "14px",
+      fontSize: "12px",
       fontWeight: 600,
       color: "#666",
     } as React.CSSProperties,
 
     experienceDuration: {
-      fontSize: "13px",
+      fontSize: "12px",
       color: "#666",
-      fontStyle: "italic" as const,
       display: "flex",
       alignItems: "center",
-      gap: "4px",
+      gap: "2px",
     } as React.CSSProperties,
 
     experienceLocation: {
-      fontSize: "13px",
+      fontSize: "12px",
       color: "#666",
       display: "flex",
       alignItems: "center",
-      gap: "4px",
+      gap: "2px",
     } as React.CSSProperties,
 
     experienceDescription: {
-      fontSize: "14px",
-      lineHeight: 1.6,
+      fontSize: "12px",
+      lineHeight: "normal",
       color: "#444",
       textAlign: "justify" as const,
     } as React.CSSProperties,
 
     educationItem: {
-      marginBottom: "20px",
+      marginBottom: "5px",
       display: "flex",
       flexDirection: "column" as const,
-      gap: "4px",
+      gap: "0",
     } as React.CSSProperties,
 
     educationHeader: {
@@ -176,31 +168,30 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
     } as React.CSSProperties,
 
     educationCourse: {
-      fontSize: "16px",
+      fontSize: "13px",
       fontWeight: "bold",
-      marginBottom: "2px",
+      marginBottom: "-2px",
       color: "#1a1a1a",
     } as React.CSSProperties,
 
     educationInstitution: {
-      fontSize: "14px",
+      fontSize: "12px",
       color: "#666",
       fontWeight: 500,
     } as React.CSSProperties,
 
     educationMeta: {
       display: "flex",
-      flexDirection: "column" as const,
-      alignItems: "flex-end",
+      flexWrap: "wrap" as const,
       gap: "2px",
-      fontSize: "13px",
+      fontSize: "12px",
       color: "#666",
     } as React.CSSProperties,
 
     educationYear: {
       display: "flex",
       alignItems: "center",
-      gap: "4px",
+      gap: "2px",
     } as React.CSSProperties,
 
     educationScore: {
@@ -217,49 +208,57 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
     skillsContainer: {
       display: "flex",
       flexDirection: "column" as const,
-      gap: "15px",
+      gap: "5px",
     } as React.CSSProperties,
 
-    skillCategory: {
-      marginBottom: "8px",
+    skillCategoryTechnical: {
+      marginBottom: "10px",
+      display: "flex",
+      gap: "20px",
+    } as React.CSSProperties,
+
+    skillCategorySoft: {
+      marginBottom: "10px",
+      display: "flex",
+      gap: "46px",
     } as React.CSSProperties,
 
     skillCategoryTitle: {
-      fontSize: "15px",
+      fontSize: "12px",
       fontWeight: 600,
-      marginBottom: "8px",
       color: "#1a1a1a",
     } as React.CSSProperties,
 
     skillsList: {
       display: "flex",
       flexWrap: "wrap" as const,
-      gap: "8px",
+      columnGap: "8px",
+      rowGap: "3px",
     } as React.CSSProperties,
 
     technicalSkill: {
       backgroundColor: "#e8f4f8",
       color: "#1565c0",
-      padding: "6px 12px",
-      borderRadius: "4px",
+      borderRadius: "3px",
+      padding: "3px 6px",
       fontSize: "13px",
-      fontWeight: 500,
+      fontWeight: 400,
       border: "1px solid #bbdefb",
     } as React.CSSProperties,
 
     softSkill: {
       backgroundColor: "#f0f0f0",
       color: "#666",
-      padding: "6px 12px",
-      borderRadius: "4px",
+      borderRadius: "3px",
+      padding: "3px 6px",
       fontSize: "13px",
-      fontWeight: 500,
+      fontWeight: 400,
       border: "1px solid #ddd",
     } as React.CSSProperties,
 
     icon: {
-      width: "14px",
-      height: "14px",
+      width: "12px",
+      height: "12px",
       display: "inline-block",
       fill: "currentColor",
       verticalAlign: "middle",
@@ -405,7 +404,7 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
                     {exp.startDate} - {exp.current ? "Present" : exp.endDate}
                   </div>
                 </div>
-                <div style={styles.experienceCompanyAndLocation}>
+                <div style={styles.experienceCompanyLocation}>
                   <div style={styles.experienceCompany}>{exp.company}</div>
                   {exp.location && (
                     <div style={styles.experienceLocation}>
@@ -469,7 +468,7 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
           <h3 style={styles.sectionTitle}>Skills & Competencies</h3>
           <div style={styles.skillsContainer}>
             {skills.technical.length > 0 && (
-              <div style={styles.skillCategory}>
+              <div style={styles.skillCategoryTechnical}>
                 <h4 style={styles.skillCategoryTitle}>Technical Skills</h4>
                 <div style={styles.skillsList}>
                   {skills.technical.map((skill, index) => (
@@ -481,7 +480,7 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
               </div>
             )}
             {skills.soft.length > 0 && (
-              <div style={styles.skillCategory}>
+              <div style={styles.skillCategorySoft}>
                 <h4 style={styles.skillCategoryTitle}>Soft Skills</h4>
                 <div style={styles.skillsList}>
                   {skills.soft.map((skill, index) => (
