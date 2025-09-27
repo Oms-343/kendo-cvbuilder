@@ -8,6 +8,7 @@ import Forms from "./LeftPanel/Forms";
 import SidebarNavigation from "./LeftPanel/SidebarNavigation";
 import CvPreview from "./MidPanel/CvPreview";
 import TemplateSelector from "./RightPanel/TemplateSelector";
+import PdfGenerator from "./PdfGenerator";
 import type {
   BasicsData,
   SummaryData,
@@ -230,11 +231,13 @@ const CvBuilder: React.FC = () => {
           </div>
         </div>
 
-        {/* Center pane: Resume preview (non-resizable, non-collapsible) */}
+        {/* Center pane: Resume preview with PDF generation (non-resizable, non-collapsible) */}
         <div style={centerPaneStyle}>
           <div style={centerPaneInnerStyle}>
             <div style={cvPreviewContainerStyle}>
-              <CvPreview cvData={cvData} template={selectedTemplate} />
+              <PdfGenerator cvData={cvData} template={selectedTemplate}>
+                <CvPreview cvData={cvData} template={selectedTemplate} />
+              </PdfGenerator>
             </div>
           </div>
         </div>
