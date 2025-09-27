@@ -321,6 +321,7 @@ const CvPreview: React.FC<CvPreviewProps> = ({ cvData }) => {
                   {edu.score && (
                     <div style={educationScoreStyle}>{edu.score}</div>
                   )}
+                  <div>{edu.location}</div>
                 </div>
               </div>
             </div>

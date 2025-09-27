@@ -18,6 +18,7 @@ export interface EducationItem {
   id: string;
   course: string;
   institution: string;
+  location: string;
   year: string;
   score: string;
 }
