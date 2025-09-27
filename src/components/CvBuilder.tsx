@@ -99,6 +99,7 @@ const CvBuilder: React.FC = () => {
       technical: [],
       soft: [],
     },
+    languages: [],
   });
 
   const [selectedTemplate, setSelectedTemplate] = useState<string>("classic");
@@ -137,6 +138,7 @@ const CvBuilder: React.FC = () => {
     { id: "education", title: "Education", icon: "graduation-cap" },
     { id: "experience", title: "Experience", icon: "briefcase" },
     { id: "skills", title: "Skills", icon: "star" },
+    { id: "languages", title: "Languages", icon: "globe" },
   ];
 
   // Active section state and refs
@@ -150,6 +152,7 @@ const CvBuilder: React.FC = () => {
     education: useRef<HTMLDivElement>(null),
     experience: useRef<HTMLDivElement>(null),
     skills: useRef<HTMLDivElement>(null),
+    languages: useRef<HTMLDivElement>(null),
   };
 
   const handleSectionClick = (sectionId: string) => {
@@ -198,6 +201,13 @@ const CvBuilder: React.FC = () => {
     }));
   };
 
+  const updateLanguages = (languages: string[]) => {
+    setCvData((prev) => ({
+      ...prev,
+      languages,
+    }));
+  };
+
   return (
     <div style={mainContainerStyle}>
       <Splitter
@@ -224,6 +234,7 @@ const CvBuilder: React.FC = () => {
               updateEducation={updateEducation}
               updateExperience={updateExperience}
               updateSkills={updateSkills}
+              updateLanguages={updateLanguages}
               formAreaRef={formAreaRef}
               formRefs={formRefs}
             />

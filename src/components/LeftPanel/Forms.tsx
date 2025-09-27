@@ -4,6 +4,7 @@ import SummaryForm from "../Forms/SummaryForm";
 import EducationForm from "../Forms/EducationForm";
 import ExperienceForm from "../Forms/ExperienceForm";
 import SkillsForm from "../Forms/SkillsForm";
+import LanguagesForm from "../Forms/LanguagesForm";
 import type { FormsProps } from "../../types";
 
 const sectionStyle: React.CSSProperties = {
@@ -32,6 +33,7 @@ const Forms: React.FC<FormsProps> = ({
   updateEducation,
   updateExperience,
   updateSkills,
+  updateLanguages,
   formAreaRef,
   formRefs,
 }) => {
@@ -97,6 +99,19 @@ const Forms: React.FC<FormsProps> = ({
         </div>
         <div style={contentStyle}>
           <SkillsForm data={cvData.skills} onUpdate={updateSkills} />
+        </div>
+      </section>
+
+      <section
+        id="form-languages"
+        ref={formRefs.languages}
+        style={sectionStyle}
+      >
+        <div style={headerStyle}>
+          <h1>Languages</h1>
+        </div>
+        <div style={contentStyle}>
+          <LanguagesForm data={cvData.languages} onUpdate={updateLanguages} />
         </div>
       </section>
     </div>

@@ -3,7 +3,7 @@ import type { ClassicTemplateProps } from "../../../types";
 import DOMPurify from "dompurify";
 
 const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
-  const { basics, summary, education, experience, skills } = cvData;
+  const { basics, summary, education, experience, skills, languages } = cvData;
 
   // Styles - Classic Professional Template
   const styles = {
@@ -491,6 +491,20 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Languages Section */}
+      {languages.length > 0 && (
+        <div style={styles.section}>
+          <h3 style={styles.sectionTitle}>Languages</h3>
+          <div style={styles.skillsList}>
+            {languages.map((language, index) => (
+              <span key={index} style={styles.softSkill}>
+                {language}
+              </span>
+            ))}
           </div>
         </div>
       )}

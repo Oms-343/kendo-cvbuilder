@@ -45,8 +45,8 @@ export interface CvData {
   education: EducationItem[];
   experience: ExperienceItem[];
   skills: SkillsData;
+  languages: string[];
 }
-
 
 // Component Props Interfaces
 export interface FormsProps {
@@ -56,6 +56,7 @@ export interface FormsProps {
   updateEducation: (education: EducationItem[]) => void;
   updateExperience: (experience: ExperienceItem[]) => void;
   updateSkills: (data: Partial<SkillsData>) => void;
+  updateLanguages: (languages: string[]) => void;
   formAreaRef: React.RefObject<HTMLDivElement | null>;
   formRefs: {
     basics: React.RefObject<HTMLDivElement | null>;
@@ -63,6 +64,7 @@ export interface FormsProps {
     education: React.RefObject<HTMLDivElement | null>;
     experience: React.RefObject<HTMLDivElement | null>;
     skills: React.RefObject<HTMLDivElement | null>;
+    languages: React.RefObject<HTMLDivElement | null>;
   };
 }
 
@@ -78,7 +80,6 @@ export interface SidebarSection {
   title: string;
   icon: string;
 }
-
 
 export interface SidebarNavigationProps {
   sections: SidebarSection[];
@@ -114,6 +115,11 @@ export interface ExperienceFormProps {
 export interface SkillsFormProps {
   data: SkillsData;
   onUpdate: (data: Partial<SkillsData>) => void;
+}
+
+export interface LanguagesFormProps {
+  data: string[];
+  onUpdate: (languages: string[]) => void;
 }
 
 export interface CvPreviewProps {
