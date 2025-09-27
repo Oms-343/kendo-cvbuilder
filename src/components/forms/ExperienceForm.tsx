@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import type { ExperienceItem, ExperienceFormProps } from "../../types";
 
 // CSS objects for cleaner code organization
-const formContainerStyle: React.CSSProperties = {
-  padding: "20px",
-};
 
 const experienceItemStyle: React.CSSProperties = {
   border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  padding: "16px",
+  borderRadius: "8px",
   marginBottom: "16px",
-  backgroundColor: "#f9f9f9",
+  marginTop: "28px",
+  backgroundColor: "#f8f9fa",
+  padding: "16px",
+  boxShadow: "0 1px 3px rgba(0, 0, 0, 0.05)",
 };
 
 const experienceItemHeaderStyle: React.CSSProperties = {
@@ -25,72 +24,95 @@ const experienceContentStyle: React.CSSProperties = {
 };
 
 const experienceTitleStyle: React.CSSProperties = {
-  margin: "0 0 8px 0",
-  fontSize: "16px",
-  fontWeight: "500",
+  margin: "0 0 6px 0",
+  fontSize: "18px",
+  fontWeight: "600",
+  color: "#333",
 };
 
 const experienceCompanyStyle: React.CSSProperties = {
   margin: "0 0 4px 0",
-  color: "#666",
+  color: "#555",
+  fontSize: "14px",
+  fontWeight: "500",
+};
+
+const experienceDetailsStyle: React.CSSProperties = {
+  margin: "2px 0",
+  color: "#777",
+  fontSize: "13px",
 };
 
 const experienceDateStyle: React.CSSProperties = {
-  margin: "0 0 8px 0",
+  margin: "4px 0 0 0",
   color: "#666",
-  fontSize: "14px",
+  fontSize: "13px",
+  fontWeight: "500",
 };
 
 const experienceDescriptionStyle: React.CSSProperties = {
-  margin: "0",
+  margin: "8px 0 0 0",
   fontSize: "14px",
   lineHeight: "1.5",
+  color: "#555",
 };
 
 const removeButtonStyle: React.CSSProperties = {
   background: "none",
   border: "none",
-  color: "#e74c3c",
+  color: "#dc3545",
   cursor: "pointer",
   fontSize: "18px",
-  marginLeft: "16px",
+  padding: "4px",
+  borderRadius: "4px",
+  transition: "background-color 0.2s ease",
 };
 
 const addExperienceSectionStyle: React.CSSProperties = {
-  border: "2px dashed #e0e0e0",
-  borderRadius: "4px",
-  padding: "20px",
-  backgroundColor: "#fafafa",
-};
-
-const addExperienceTitleStyle: React.CSSProperties = {
-  margin: "0 0 16px 0",
-  fontSize: "16px",
-  fontWeight: "500",
+  borderRadius: "8px",
+  backgroundColor: "transparent",
 };
 
 const addExperienceGridStyle: React.CSSProperties = {
-  display: "grid",
-  gap: "16px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+  marginBottom: "20px",
 };
 
-const addExperienceRowStyle: React.CSSProperties = {
-  display: "grid",
-  gap: "16px",
-  gridTemplateColumns: "1fr 1fr",
+const dateRowStyle: React.CSSProperties = {
+  display: "flex",
+  gap: "20px",
+};
+
+const dateFieldStyle: React.CSSProperties = {
+  flex: 1,
+};
+
+const formFieldStyle: React.CSSProperties = {
+  marginBottom: "0",
+};
+
+const labelStyle: React.CSSProperties = {
+  display: "block",
+  fontSize: "14px",
+  fontWeight: "500",
+  color: "#333333",
+  marginBottom: "8px",
+  lineHeight: "1.4",
+};
+
+const requiredAsteriskStyle: React.CSSProperties = {
+  color: "#d32f2f",
+  marginLeft: "2px",
 };
 
 const inputStyle: React.CSSProperties = {
+  width: "100%",
   padding: "8px 12px",
   border: "1px solid #e0e0e0",
   borderRadius: "4px",
   fontSize: "14px",
-};
-
-const checkboxContainerStyle: React.CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: "16px",
 };
 
 const checkboxLabelStyle: React.CSSProperties = {
@@ -98,17 +120,11 @@ const checkboxLabelStyle: React.CSSProperties = {
   alignItems: "center",
   gap: "8px",
   fontSize: "14px",
-};
-
-const endDateInputStyle: React.CSSProperties = {
-  padding: "8px 12px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-  flex: 1,
+  color: "#333333",
 };
 
 const textareaStyle: React.CSSProperties = {
+  width: "100%",
   padding: "8px 12px",
   border: "1px solid #e0e0e0",
   borderRadius: "4px",
@@ -118,7 +134,6 @@ const textareaStyle: React.CSSProperties = {
 };
 
 const addButtonStyle: React.CSSProperties = {
-  marginTop: "16px",
   padding: "8px 16px",
   backgroundColor: "#1976d2",
   color: "white",
@@ -126,6 +141,19 @@ const addButtonStyle: React.CSSProperties = {
   borderRadius: "4px",
   cursor: "pointer",
   fontSize: "14px",
+  fontWeight: "500",
+  transition: "background-color 0.2s ease",
+};
+
+const disabledInputStyle: React.CSSProperties = {
+  width: "100%",
+  padding: "8px 12px",
+  border: "1px solid #e0e0e0",
+  borderRadius: "4px",
+  fontSize: "14px",
+  backgroundColor: "#f5f5f5",
+  color: "#999",
+  cursor: "not-allowed",
 };
 
 const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
@@ -169,84 +197,95 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
   };
 
   return (
-    <div style={formContainerStyle}>
-      {/* Existing Experience Items */}
-      {data.map((experience) => (
-        <div key={experience.id} style={experienceItemStyle}>
-          <div style={experienceItemHeaderStyle}>
-            <div style={experienceContentStyle}>
-              <h4 style={experienceTitleStyle}>{experience.position}</h4>
-              <p style={experienceCompanyStyle}>
-                {experience.company}{" "}
-                {experience.location && `• ${experience.location}`}
-              </p>
-              <p style={experienceDateStyle}>
-                {experience.startDate} -{" "}
-                {experience.current ? "Present" : experience.endDate}
-              </p>
-              {experience.description && (
-                <p style={experienceDescriptionStyle}>
-                  {experience.description}
-                </p>
-              )}
-            </div>
-            <button
-              onClick={() => handleRemoveExperience(experience.id)}
-              style={removeButtonStyle}
-            >
-              ×
-            </button>
-          </div>
-        </div>
-      ))}
-
+    <div>
       {/* Add New Experience Form */}
       <div style={addExperienceSectionStyle}>
-        <h4 style={addExperienceTitleStyle}>Add Experience</h4>
         <div style={addExperienceGridStyle}>
-          <div style={addExperienceRowStyle}>
+          {/* Position */}
+          <div style={formFieldStyle}>
+            <label style={labelStyle}>
+              Position <span style={requiredAsteriskStyle}>*</span>
+            </label>
             <input
               type="text"
-              placeholder="Position"
+              placeholder="Software Engineer"
               value={newExperience.position || ""}
               onChange={(e) =>
                 setNewExperience({ ...newExperience, position: e.target.value })
               }
               style={inputStyle}
             />
+          </div>
+
+          {/* Company */}
+          <div style={formFieldStyle}>
+            <label style={labelStyle}>
+              Company <span style={requiredAsteriskStyle}>*</span>
+            </label>
             <input
               type="text"
-              placeholder="Company"
+              placeholder="Company Name"
               value={newExperience.company || ""}
               onChange={(e) =>
                 setNewExperience({ ...newExperience, company: e.target.value })
               }
               style={inputStyle}
             />
+          </div>
+
+          {/* Location */}
+          <div style={formFieldStyle}>
+            <label style={labelStyle}>Location</label>
             <input
               type="text"
-              placeholder="Location (optional)"
+              placeholder="City, State"
               value={newExperience.location || ""}
               onChange={(e) =>
                 setNewExperience({ ...newExperience, location: e.target.value })
               }
               style={inputStyle}
             />
-            <input
-              type="text"
-              placeholder="Start Date"
-              value={newExperience.startDate || ""}
-              onChange={(e) =>
-                setNewExperience({
-                  ...newExperience,
-                  startDate: e.target.value,
-                })
-              }
-              style={inputStyle}
-            />
           </div>
 
-          <div style={checkboxContainerStyle}>
+          {/* Start Date and End Date in flex row */}
+          <div style={dateRowStyle}>
+            <div style={dateFieldStyle}>
+              <label style={labelStyle}>
+                Start Date <span style={requiredAsteriskStyle}>*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Jan 2020"
+                value={newExperience.startDate || ""}
+                onChange={(e) =>
+                  setNewExperience({
+                    ...newExperience,
+                    startDate: e.target.value,
+                  })
+                }
+                style={inputStyle}
+              />
+            </div>
+            <div style={dateFieldStyle}>
+              <label style={labelStyle}>End Date</label>
+              <input
+                type="text"
+                placeholder="Dec 2022"
+                value={newExperience.endDate || ""}
+                onChange={(e) =>
+                  setNewExperience({
+                    ...newExperience,
+                    endDate: e.target.value,
+                  })
+                }
+                disabled={newExperience.current || false}
+                style={newExperience.current ? disabledInputStyle : inputStyle}
+              />
+            </div>
+          </div>
+
+          {/* Currently working checkbox */}
+          <div style={formFieldStyle}>
             <label style={checkboxLabelStyle}>
               <input
                 type="checkbox"
@@ -261,40 +300,53 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
               />
               Currently working here
             </label>
-            {!newExperience.current && (
-              <input
-                type="text"
-                placeholder="End Date"
-                value={newExperience.endDate || ""}
-                onChange={(e) =>
-                  setNewExperience({
-                    ...newExperience,
-                    endDate: e.target.value,
-                  })
-                }
-                style={endDateInputStyle}
-              />
-            )}
           </div>
 
-          <textarea
-            placeholder="Job description (optional)"
-            value={newExperience.description || ""}
-            onChange={(e) =>
-              setNewExperience({
-                ...newExperience,
-                description: e.target.value,
-              })
-            }
-            rows={4}
-            style={textareaStyle}
-          />
+          {/* Description */}
+          <div style={formFieldStyle}>
+            <label style={labelStyle}>Job Description</label>
+            <textarea
+              placeholder="Describe your responsibilities and achievements..."
+              value={newExperience.description || ""}
+              onChange={(e) =>
+                setNewExperience({
+                  ...newExperience,
+                  description: e.target.value,
+                })
+              }
+              rows={4}
+              style={textareaStyle}
+            />
+          </div>
         </div>
-
         <button onClick={handleAddExperience} style={addButtonStyle}>
           Add Experience
         </button>
       </div>
+
+      {/* Existing Experience Items */}
+      {data.map((experience) => (
+        <div key={experience.id} style={experienceItemStyle}>
+          <div style={experienceItemHeaderStyle}>
+            <div style={experienceContentStyle}>
+              <h4 style={experienceTitleStyle}>{experience.position}</h4>
+              <p style={experienceCompanyStyle}>{experience.company}</p>
+            </div>
+            <button
+              onClick={() => handleRemoveExperience(experience.id)}
+              style={removeButtonStyle}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#f8d7da";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+              }}
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

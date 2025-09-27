@@ -37,19 +37,6 @@ const educationInstitutionStyle: React.CSSProperties = {
   fontWeight: "500",
 };
 
-const educationDetailsStyle: React.CSSProperties = {
-  margin: "2px 0",
-  color: "#777",
-  fontSize: "13px",
-};
-
-const educationYearScoreStyle: React.CSSProperties = {
-  margin: "4px 0 0 0",
-  color: "#666",
-  fontSize: "13px",
-  fontWeight: "500",
-};
-
 const removeButtonStyle: React.CSSProperties = {
   background: "none",
   border: "none",
@@ -249,13 +236,6 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
             <div style={educationContentStyle}>
               <h4 style={educationTitleStyle}>{education.course}</h4>
               <p style={educationInstitutionStyle}>{education.institution}</p>
-              {education.location && (
-                <p style={educationDetailsStyle}>{education.location}</p>
-              )}
-              <p style={educationYearScoreStyle}>
-                {education.year}
-                {education.score && ` • GPA: ${education.score}`}
-              </p>
             </div>
             <button
               onClick={() => handleRemoveEducation(education.id)}
