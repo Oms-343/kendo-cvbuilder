@@ -72,7 +72,7 @@ const PdfGenerator: React.FC<PdfGeneratorProps> = ({ cvData, template }) => {
           bottom: "0",
         }}
       >
-        <div className="cv-content-for-pdf">{renderTemplate()}</div>
+        <div>{renderTemplate()}</div>
       </PDFExport>
     </div>
   );
