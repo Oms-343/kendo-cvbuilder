@@ -47,18 +47,6 @@ export interface CvData {
   skills: SkillsData;
 }
 
-export interface FormSection {
-  id: string;
-  title: string;
-  icon: string;
-  component: React.ComponentType<any>;
-}
-
-export interface SidebarSection {
-  id: string;
-  title: string;
-  icon: string;
-}
 
 // Component Props Interfaces
 export interface FormsProps {
@@ -77,6 +65,20 @@ export interface FormsProps {
     skills: React.RefObject<HTMLDivElement | null>;
   };
 }
+
+export interface FormSection {
+  id: string;
+  title: string;
+  icon: string;
+  component: React.ComponentType<any>;
+}
+
+export interface SidebarSection {
+  id: string;
+  title: string;
+  icon: string;
+}
+
 
 export interface SidebarNavigationProps {
   sections: SidebarSection[];
