@@ -126,6 +126,11 @@ export interface Template {
   description: string;
 }
 
+export interface PdfGeneratorProps {
+  cvData: CvData;
+  template: string;
+}
+
 export const templates: Template[] = [
   {
     id: "classic",

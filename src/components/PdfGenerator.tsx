@@ -1,41 +1,38 @@
 import React, { useRef } from "react";
-import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import { PDFExport } from "@progress/kendo-react-pdf";
 import { Button } from "@progress/kendo-react-buttons";
-import type { CvData } from "../types";
+import type { PdfGeneratorProps } from "../types";
 import ClassicTemplate from "./RightPanel/CvTemplates/ClassicTemplate";
+import ModernTemplate from "./RightPanel/CvTemplates/ModernTemplate";
 
-interface PdfGeneratorProps {
-  cvData: CvData;
-  template: string;
-  children?: React.ReactNode;
-}
+const exportAreaStyle: React.CSSProperties = {
+  position: "absolute",
+  top: "10px",
+  right: "10px",
+  zIndex: 10,
+  backgroundColor: "#ffffff",
+  padding: "8px 16px",
+  borderRadius: "8px",
+  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+  border: "1px solid #e0e0e0",
+};
 
-const PdfGenerator: React.FC<PdfGeneratorProps> = ({
-  cvData,
-  template,
-  children,
-}) => {
+const buttonStyle: React.CSSProperties = {
+  fontSize: "14px",
+  fontWeight: "500",
+  padding: "8px 16px",
+  backgroundColor: "#6366f1",
+  borderColor: "#6366f1",
+  borderRadius: "6px",
+  color: "#ffffff",
+};
+
+const PdfGenerator: React.FC<PdfGeneratorProps> = ({ cvData, template }) => {
   const pdfExportComponent = useRef<PDFExport>(null);
 
   const exportPDFWithComponent = () => {
     if (pdfExportComponent.current) {
       pdfExportComponent.current.save();
-    }
-  };
-
-  const exportPDFWithMethod = () => {
-    const element = document.querySelector(".cv-content-for-pdf");
-    if (element) {
-      savePDF(element as HTMLElement, {
-        paperSize: "A4",
-        fileName: `${cvData.basics.fullName || "CV"}_Resume.pdf`,
-        margin: {
-          top: "0",
-          left: "0",
-          right: "0",
-          bottom: "0",
-        },
-      });
     }
   };
 
@@ -45,42 +42,21 @@ const PdfGenerator: React.FC<PdfGeneratorProps> = ({
         return <ClassicTemplate cvData={cvData} />;
       case "modern":
       default:
-        // For now, fallback to classic template
-        return <ClassicTemplate cvData={cvData} />;
+        return <ModernTemplate cvData={cvData} />;
     }
   };
 
-  const buttonStyle: React.CSSProperties = {
-    margin: "10px",
-    backgroundColor: "#1976d2",
-    borderColor: "#1976d2",
-  };
-
   return (
-    <div>
-      {/* PDF Export using Component Method */}
-      <div
-        style={{
-          marginBottom: "20px",
-          padding: "10px",
-          borderRadius: "4px",
-        }}
-      >
+    <div style={{ position: "relative" }}>
+      {/* Export Button - Positioned relatively to the CV area */}
+      <div style={exportAreaStyle}>
         <Button
           themeColor="primary"
           style={buttonStyle}
           onClick={exportPDFWithComponent}
           icon="file-pdf"
         >
-          Generate PDF (Component)
-        </Button>
-
-        <Button
-          style={buttonStyle}
-          onClick={exportPDFWithMethod}
-          icon="file-pdf"
-        >
-          Generate PDF (Method)
+          Export
         </Button>
       </div>
 
@@ -96,7 +72,7 @@ const PdfGenerator: React.FC<PdfGeneratorProps> = ({
           bottom: "0",
         }}
       >
-        <div className="cv-content-for-pdf">{children || renderTemplate()}</div>
+        <div className="cv-content-for-pdf">{renderTemplate()}</div>
       </PDFExport>
     </div>
   );
