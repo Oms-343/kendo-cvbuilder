@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Editor, EditorTools } from "@progress/kendo-react-editor";
 import type { ExperienceItem, ExperienceFormProps } from "../../types";
 
 // CSS objects for cleaner code organization
@@ -103,16 +104,6 @@ const checkboxLabelStyle: React.CSSProperties = {
   gap: "8px",
   fontSize: "14px",
   color: "#333333",
-};
-
-const textareaStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "8px 12px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-  fontFamily: "inherit",
-  resize: "vertical",
 };
 
 const addButtonStyle: React.CSSProperties = {
@@ -287,17 +278,19 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
           {/* Description */}
           <div style={formFieldStyle}>
             <label style={labelStyle}>Job Description</label>
-            <textarea
-              placeholder="Describe your responsibilities and achievements..."
+            <Editor
               value={newExperience.description || ""}
-              onChange={(e) =>
+              onChange={(event) =>
                 setNewExperience({
                   ...newExperience,
-                  description: e.target.value,
+                  description: event.html || "",
                 })
               }
-              rows={4}
-              style={textareaStyle}
+              tools={[
+                [EditorTools.Bold, EditorTools.Italic, EditorTools.Underline],
+                [EditorTools.UnorderedList, EditorTools.OrderedList],
+                [EditorTools.Link, EditorTools.Unlink],
+              ]}
             />
           </div>
         </div>
