@@ -6,7 +6,6 @@ import type {
 } from "@progress/kendo-react-layout";
 import Forms from "./LeftPanel/Forms";
 import SidebarNavigation from "./LeftPanel/SidebarNavigation";
-import CvPreview from "./MidPanel/CvPreview";
 import TemplateSelector from "./RightPanel/TemplateSelector";
 import PdfGenerator from "./PdfGenerator";
 import type {
@@ -235,9 +234,7 @@ const CvBuilder: React.FC = () => {
         <div style={centerPaneStyle}>
           <div style={centerPaneInnerStyle}>
             <div style={cvPreviewContainerStyle}>
-              <PdfGenerator cvData={cvData} template={selectedTemplate}>
-                <CvPreview cvData={cvData} template={selectedTemplate} />
-              </PdfGenerator>
+              <PdfGenerator cvData={cvData} template={selectedTemplate} />
             </div>
           </div>
         </div>
