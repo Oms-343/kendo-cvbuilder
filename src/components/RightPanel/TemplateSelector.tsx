@@ -1,6 +1,7 @@
 import React from "react";
 import type { TemplateSelectorProps } from "../../types";
 import { templates } from "../../types";
+import classicTemplateImage from "../../assets/classic.png";
 
 // CSS objects for cleaner code organization
 const containerStyle: React.CSSProperties = {
@@ -118,13 +119,26 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
               <div
                 style={templatePreviewStyle(selectedTemplate === template.id)}
               >
-                {/* Template thumbnail placeholder */}
-                <div style={templatePlaceholderStyle}>
-                  <div>
-                    <div style={templateNameStyle}>{template.name}</div>
-                    <div style={templatePreviewTextStyle}>Template Preview</div>
+                {/* Show actual template image for classic, placeholder for others */}
+                {template.id === 'classic' ? (
+                  <img 
+                    src={classicTemplateImage} 
+                    alt={`${template.name} template preview`}
+                    style={{ 
+                      maxWidth: '100%', 
+                      maxHeight: '100%', 
+                      objectFit: 'contain',
+                      display: 'block'
+                    }}
+                  />
+                ) : (
+                  <div style={templatePlaceholderStyle}>
+                    <div>
+                      <div style={templateNameStyle}>{template.name}</div>
+                      <div style={templatePreviewTextStyle}>Template Preview</div>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               <div style={templateInfoStyle}>
