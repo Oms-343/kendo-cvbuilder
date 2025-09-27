@@ -9,6 +9,7 @@ const formContainerStyle: React.CSSProperties = {
 const photoUploadSectionStyle: React.CSSProperties = {
   marginBottom: "20px",
   display: "flex",
+  gap: "25px",
 };
 
 const photoUploadContainerStyle: React.CSSProperties = {
