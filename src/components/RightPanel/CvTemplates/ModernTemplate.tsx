@@ -1,5 +1,6 @@
 import React from "react";
 import type { ModernTemplateProps } from "../../../types";
+import DOMPurify from "dompurify";
 
 const ModernTemplate: React.FC<ModernTemplateProps> = ({ cvData }) => {
   const { basics, summary, education, experience, skills } = cvData;
@@ -254,7 +255,13 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ cvData }) => {
       {summary.content && (
         <div style={sectionStyle}>
           <h3 style={sectionTitleStyle}>Summary</h3>
-          <p style={summaryContentStyle}>{summary.content}</p>
+          {/* <p style={summaryContentStyle}>{summary.content}</p> */}
+          <div
+            style={summaryContentStyle}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(summary.content || ""),
+            }}
+          />
         </div>
       )}
 
@@ -276,7 +283,13 @@ const ModernTemplate: React.FC<ModernTemplateProps> = ({ cvData }) => {
                 </div>
               </div>
               {exp.description && (
-                <p style={experienceDescriptionStyle}>{exp.description}</p>
+                // <p style={experienceDescriptionStyle}>{exp.description}</p>
+                <div
+                  style={experienceDescriptionStyle}
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(exp.description || ""),
+                  }}
+                />
               )}
             </div>
           ))}

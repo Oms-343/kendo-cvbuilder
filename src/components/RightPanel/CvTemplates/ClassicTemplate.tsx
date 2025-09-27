@@ -1,5 +1,6 @@
 import React from "react";
 import type { ClassicTemplateProps } from "../../../types";
+import DOMPurify from "dompurify";
 
 const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
   const { basics, summary, education, experience, skills } = cvData;
@@ -380,7 +381,13 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
       {summary.content && (
         <div style={styles.section}>
           <h3 style={styles.sectionTitle}>Professional Summary</h3>
-          <p style={styles.summaryContent}>{summary.content}</p>
+          {/* <p style={styles.summaryContent}>{summary.content}</p> */}
+          <div
+            style={styles.summaryContent}
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(summary.content || ""),
+            }}
+          />
         </div>
       )}
 
@@ -409,7 +416,13 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
                 </div>
               </div>
               {exp.description && (
-                <p style={styles.experienceDescription}>{exp.description}</p>
+                // <p style={styles.experienceDescription}>{exp.description}</p>
+                <div
+                  style={styles.experienceDescription}
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(exp.description || ""),
+                  }}
+                />
               )}
             </div>
           ))}
