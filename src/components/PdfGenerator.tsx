@@ -71,8 +71,9 @@ const PdfGenerator: React.FC<PdfGeneratorProps> = ({ cvData, template }) => {
           right: "0",
           bottom: "0",
         }}
+        scale={0.8}
       >
-        <div>{renderTemplate()}</div>
+        <div className="editor-content">{renderTemplate()}</div>
       </PDFExport>
     </div>
   );
