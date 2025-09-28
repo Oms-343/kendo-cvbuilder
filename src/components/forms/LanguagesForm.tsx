@@ -1,78 +1,80 @@
 import React, { useState } from "react";
 import type { LanguagesFormProps } from "../../types";
 
-// CSS objects for cleaner code organization
-const formContainerStyle: React.CSSProperties = {
-  padding: "20px",
-};
+// Styles - All CSS objects organized in one place
+const styles = {
+  formContainer: {
+    padding: "20px",
+  } as React.CSSProperties,
 
-const languagesSectionStyle: React.CSSProperties = {
-  marginBottom: "32px",
-};
+  languagesSection: {
+    marginBottom: "32px",
+  } as React.CSSProperties,
 
-const languagesTitleStyle: React.CSSProperties = {
-  margin: "0 0 16px 0",
-  fontSize: "16px",
-  fontWeight: "500",
-  color: "#333",
-};
+  languagesTitle: {
+    margin: "0 0 16px 0",
+    fontSize: "16px",
+    fontWeight: "500",
+    color: "#333",
+  } as React.CSSProperties,
 
-const languagesDisplayStyle: React.CSSProperties = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "8px",
-  marginBottom: "16px",
-};
+  languagesDisplay: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+    marginBottom: "16px",
+  } as React.CSSProperties,
 
-const languageTagStyle: React.CSSProperties = {
-  background: "#f0f0f0",
-  color: "#666",
-  padding: "4px 8px 4px 12px",
-  borderRadius: "20px",
-  fontSize: "14px",
-  fontWeight: "500",
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-};
+  languageTag: {
+    background: "#f0f0f0",
+    color: "#666",
+    padding: "4px 8px 4px 12px",
+    borderRadius: "20px",
+    fontSize: "14px",
+    fontWeight: "500",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  } as React.CSSProperties,
 
-const removeButtonStyle: React.CSSProperties = {
-  background: "none",
-  border: "none",
-  color: "#666",
-  cursor: "pointer",
-  fontSize: "16px",
-  padding: "0",
-  width: "16px",
-  height: "16px",
-  borderRadius: "50%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
+  removeButton: {
+    background: "none",
+    border: "none",
+    color: "#666",
+    cursor: "pointer",
+    fontSize: "16px",
+    padding: "0",
+    width: "16px",
+    height: "16px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  } as React.CSSProperties,
 
-const addLanguageContainerStyle: React.CSSProperties = {
-  display: "flex",
-  gap: "8px",
-  alignItems: "center",
-};
+  addLanguageContainer: {
+    display: "flex",
+    gap: "8px",
+    alignItems: "center",
+  } as React.CSSProperties,
 
-const languageInputStyle: React.CSSProperties = {
-  flex: 1,
-  padding: "8px 12px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-};
+  languageInput: {
+    flex: 1,
+    padding: "8px 12px",
+    border: "1px solid #e0e0e0",
+    borderRadius: "4px",
+    fontSize: "14px",
+  } as React.CSSProperties,
 
-const addButtonStyle: React.CSSProperties = {
-  padding: "8px 16px",
-  backgroundColor: "#666",
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontSize: "14px",
+  addButton: {
+    padding: "8px 16px",
+    backgroundColor: "#666",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "14px",
+  } as React.CSSProperties,
 };
 
 const LanguagesForm: React.FC<LanguagesFormProps> = ({ data, onUpdate }) => {
@@ -97,20 +99,20 @@ const LanguagesForm: React.FC<LanguagesFormProps> = ({ data, onUpdate }) => {
   };
 
   return (
-    <div style={formContainerStyle}>
+    <div style={styles.formContainer}>
       {/* Languages Section */}
-      <div style={languagesSectionStyle}>
-        <h4 style={languagesTitleStyle}>Languages</h4>
+      <div style={styles.languagesSection}>
+        <h4 style={styles.languagesTitle}>Languages</h4>
 
         {/* Languages Display */}
         {data.length > 0 && (
-          <div style={languagesDisplayStyle}>
+          <div style={styles.languagesDisplay}>
             {data.map((language) => (
-              <span key={language} style={languageTagStyle}>
+              <span key={language} style={styles.languageTag}>
                 {language}
                 <button
                   onClick={() => removeLanguage(language)}
-                  style={removeButtonStyle}
+                  style={styles.removeButton}
                 >
                   ×
                 </button>
@@ -120,16 +122,16 @@ const LanguagesForm: React.FC<LanguagesFormProps> = ({ data, onUpdate }) => {
         )}
 
         {/* Add Language */}
-        <div style={addLanguageContainerStyle}>
+        <div style={styles.addLanguageContainer}>
           <input
             type="text"
             placeholder="Add language (e.g., English, Spanish, French)"
             value={newLanguage}
             onChange={(e) => setNewLanguage(e.target.value)}
             onKeyPress={(e) => handleKeyPress(e, addLanguage)}
-            style={languageInputStyle}
+            style={styles.languageInput}
           />
-          <button onClick={addLanguage} style={addButtonStyle}>
+          <button onClick={addLanguage} style={styles.addButton}>
             Add
           </button>
         </div>

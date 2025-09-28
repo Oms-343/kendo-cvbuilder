@@ -7,23 +7,26 @@ import SkillsForm from "../Forms/SkillsForm";
 import LanguagesForm from "../Forms/LanguagesForm";
 import type { FormsProps } from "../../types";
 
-const sectionStyle: React.CSSProperties = {
-  borderBottom: "1px solid #f0f0f0",
-};
+// Styles - All CSS objects organized in one place
+const styles = {
+  section: {
+    borderBottom: "1px solid #f0f0f0",
+  } as React.CSSProperties,
 
-const headerStyle: React.CSSProperties = {
-  backgroundColor: "#f8f9fa",
-  padding: "16px 24px",
-  borderBottom: "1px solid #e0e0e0",
-  position: "sticky",
-  top: "0",
-  zIndex: "10",
-};
+  header: {
+    backgroundColor: "#f8f9fa",
+    padding: "16px 24px",
+    borderBottom: "1px solid #e0e0e0",
+    position: "sticky",
+    top: "0",
+    zIndex: "10",
+  } as React.CSSProperties,
 
-const contentStyle: React.CSSProperties = {
-  padding: "24px",
-  paddingBottom: "40px",
-  backgroundColor: "#ffffff",
+  content: {
+    padding: "24px",
+    paddingBottom: "40px",
+    backgroundColor: "#ffffff",
+  } as React.CSSProperties,
 };
 
 const Forms: React.FC<FormsProps> = ({
@@ -46,20 +49,20 @@ const Forms: React.FC<FormsProps> = ({
         height: "100%",
       }}
     >
-      <section id="form-basics" ref={formRefs.basics} style={sectionStyle}>
-        <div style={headerStyle}>
+      <section id="form-basics" ref={formRefs.basics} style={styles.section}>
+        <div style={styles.header}>
           <h1>Basics</h1>
         </div>
-        <div style={contentStyle}>
+        <div style={styles.content}>
           <BasicsForm data={cvData.basics} onUpdate={updateBasics} />
         </div>
       </section>
 
-      <section id="form-summary" ref={formRefs.summary} style={sectionStyle}>
-        <div style={headerStyle}>
+      <section id="form-summary" ref={formRefs.summary} style={styles.section}>
+        <div style={styles.header}>
           <h1>Summary</h1>
         </div>
-        <div style={contentStyle}>
+        <div style={styles.content}>
           <SummaryForm data={cvData.summary} onUpdate={updateSummary} />
         </div>
       </section>
@@ -67,12 +70,12 @@ const Forms: React.FC<FormsProps> = ({
       <section
         id="form-education"
         ref={formRefs.education}
-        style={sectionStyle}
+        style={styles.section}
       >
-        <div style={headerStyle}>
+        <div style={styles.header}>
           <h1>Education</h1>
         </div>
-        <div style={contentStyle}>
+        <div style={styles.content}>
           <EducationForm data={cvData.education} onUpdate={updateEducation} />
         </div>
       </section>
@@ -80,12 +83,12 @@ const Forms: React.FC<FormsProps> = ({
       <section
         id="form-experience"
         ref={formRefs.experience}
-        style={sectionStyle}
+        style={styles.section}
       >
-        <div style={headerStyle}>
+        <div style={styles.header}>
           <h1>Experience</h1>
         </div>
-        <div style={contentStyle}>
+        <div style={styles.content}>
           <ExperienceForm
             data={cvData.experience}
             onUpdate={updateExperience}
@@ -93,11 +96,11 @@ const Forms: React.FC<FormsProps> = ({
         </div>
       </section>
 
-      <section id="form-skills" ref={formRefs.skills} style={sectionStyle}>
-        <div style={headerStyle}>
+      <section id="form-skills" ref={formRefs.skills} style={styles.section}>
+        <div style={styles.header}>
           <h1>Skills</h1>
         </div>
-        <div style={contentStyle}>
+        <div style={styles.content}>
           <SkillsForm data={cvData.skills} onUpdate={updateSkills} />
         </div>
       </section>
@@ -105,12 +108,12 @@ const Forms: React.FC<FormsProps> = ({
       <section
         id="form-languages"
         ref={formRefs.languages}
-        style={sectionStyle}
+        style={styles.section}
       >
-        <div style={headerStyle}>
+        <div style={styles.header}>
           <h1>Languages</h1>
         </div>
-        <div style={contentStyle}>
+        <div style={styles.content}>
           <LanguagesForm data={cvData.languages} onUpdate={updateLanguages} />
         </div>
       </section>

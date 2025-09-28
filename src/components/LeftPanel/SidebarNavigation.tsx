@@ -17,68 +17,70 @@ const iconMap: Record<string, string> = {
   code: "💻",
 };
 
-// CSS objects for cleaner code organization
-const sidebarContainerStyle: React.CSSProperties = {
-  height: "100vh",
-  width: "80px",
-  backgroundColor: "#fafafa",
-  borderRight: "2px solid #e5e5e5",
-  fontFamily: "system-ui, -apple-system, sans-serif",
-  transition: "width 300ms ease-in-out",
-  display: "flex",
-  flexDirection: "column",
-  padding: "20px 5px",
-  alignItems: "center",
-  gap: "8px",
-};
+// Styles - All CSS objects organized in one place
+const styles = {
+  sidebarContainer: {
+    height: "100vh",
+    width: "80px",
+    backgroundColor: "#fafafa",
+    borderRight: "2px solid #e5e5e5",
+    fontFamily: "system-ui, -apple-system, sans-serif",
+    transition: "width 300ms ease-in-out",
+    display: "flex",
+    flexDirection: "column",
+    padding: "20px 5px",
+    alignItems: "center",
+    gap: "8px",
+  } as React.CSSProperties,
 
-const sectionContainerStyle: React.CSSProperties = {
-  position: "relative",
-  display: "flex",
-  justifyContent: "center",
-  width: "100%",
-};
+  sectionContainer: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+  } as React.CSSProperties,
 
-const sectionButtonStyle = (isActive: boolean): React.CSSProperties => ({
-  width: "40px",
-  height: "40px",
-  borderRadius: "8px",
-  border: "1px solid transparent",
-  backgroundColor: isActive ? "#1976d2" : "transparent",
-  color: isActive ? "white" : "#666",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  cursor: "pointer",
-  transition: "all 0.2s ease",
-  padding: "0",
-  minWidth: "auto",
-  fontSize: "18px",
-});
+  sectionButton: (isActive: boolean): React.CSSProperties => ({
+    width: "40px",
+    height: "40px",
+    borderRadius: "8px",
+    border: "1px solid transparent",
+    backgroundColor: isActive ? "#1976d2" : "transparent",
+    color: isActive ? "white" : "#666",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    padding: "0",
+    minWidth: "auto",
+    fontSize: "18px",
+  }),
 
-const iconStyle: React.CSSProperties = {
-  fontSize: "18px",
-  lineHeight: "1",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
+  icon: {
+    fontSize: "18px",
+    lineHeight: "1",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  } as React.CSSProperties,
 
-const tooltipStyle: React.CSSProperties = {
-  position: "absolute",
-  left: "90px",
-  top: "50%",
-  transform: "translateY(-50%)",
-  backgroundColor: "#333",
-  color: "white",
-  padding: "4px 8px",
-  borderRadius: "4px",
-  fontSize: "12px",
-  whiteSpace: "nowrap",
-  zIndex: 1000,
-  opacity: 0,
-  pointerEvents: "none",
-  transition: "opacity 0.2s ease",
+  tooltip: {
+    position: "absolute",
+    left: "90px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    backgroundColor: "#333",
+    color: "white",
+    padding: "4px 8px",
+    borderRadius: "4px",
+    fontSize: "12px",
+    whiteSpace: "nowrap",
+    zIndex: 1000,
+    opacity: 0,
+    pointerEvents: "none",
+    transition: "opacity 0.2s ease",
+  } as React.CSSProperties,
 };
 
 const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
@@ -87,13 +89,13 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
   onSectionClick,
 }) => {
   return (
-    <div style={sidebarContainerStyle}>
+    <div style={styles.sidebarContainer}>
       {sections.map((section) => (
-        <div key={section.id} style={sectionContainerStyle}>
+        <div key={section.id} style={styles.sectionContainer}>
           <button
             onClick={() => onSectionClick(section.id)}
             title={section.title}
-            style={sectionButtonStyle(activeSection === section.id)}
+            style={styles.sectionButton(activeSection === section.id)}
             onMouseEnter={(e) => {
               if (activeSection !== section.id) {
                 e.currentTarget.style.backgroundColor = "#e3f2fd";
@@ -116,11 +118,11 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
               e.currentTarget.style.outline = "none";
             }}
           >
-            <span style={iconStyle}>{iconMap[section.icon] || "📋"}</span>
+            <span style={styles.icon}>{iconMap[section.icon] || "📋"}</span>
           </button>
 
           {/* Tooltip */}
-          <div style={tooltipStyle}>{section.title}</div>
+          <div style={styles.tooltip}>{section.title}</div>
         </div>
       ))}
     </div>

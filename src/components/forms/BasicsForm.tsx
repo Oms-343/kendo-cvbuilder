@@ -1,117 +1,119 @@
 import React from "react";
 import type { BasicsData, BasicsFormProps } from "../../types";
 
-// CSS objects for cleaner code organization
-const formContainerStyle: React.CSSProperties = {
-  width: "100%",
-};
+// Styles - All CSS objects organized in one place
+const styles = {
+  formContainer: {
+    width: "100%",
+  } as React.CSSProperties,
 
-const photoUploadSectionStyle: React.CSSProperties = {
-  marginBottom: "20px",
-  display: "flex",
-  gap: "25px",
-};
+  photoUploadSection: {
+    marginBottom: "20px",
+    display: "flex",
+    gap: "25px",
+  } as React.CSSProperties,
 
-const photoUploadContainerStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "start",
-  gap: "20px",
-  padding: "20px 0",
-  paddingTop: "0",
-};
+  photoUploadContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    gap: "20px",
+    padding: "20px 0",
+    paddingTop: "0",
+  } as React.CSSProperties,
 
-const photoPlaceholderStyle: React.CSSProperties = {
-  width: "100px",
-  height: "100px",
-  borderRadius: "50%",
-  border: "2px dashed #e0e0e0",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "#f8f9fa",
-  overflow: "hidden",
-  position: "relative",
-};
+  photoPlaceholder: {
+    width: "100px",
+    height: "100px",
+    borderRadius: "50%",
+    border: "2px dashed #e0e0e0",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#f8f9fa",
+    overflow: "hidden",
+    position: "relative",
+  } as React.CSSProperties,
 
-const photoImageStyle: React.CSSProperties = {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  borderRadius: "50%",
-};
+  photoImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: "50%",
+  } as React.CSSProperties,
 
-const photoPlaceholderTextStyle: React.CSSProperties = {
-  textAlign: "center",
-  color: "#666",
-  fontSize: "12px",
-  lineHeight: "1.2",
-};
+  photoPlaceholderText: {
+    textAlign: "center",
+    color: "#666",
+    fontSize: "12px",
+    lineHeight: "1.2",
+  } as React.CSSProperties,
 
-const uploadButtonStyle: React.CSSProperties = {
-  padding: "6px 12px",
-  backgroundColor: "#1976d2",
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontSize: "12px",
-};
+  uploadButton: {
+    padding: "6px 12px",
+    backgroundColor: "#1976d2",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "12px",
+  } as React.CSSProperties,
 
-const hiddenInputStyle: React.CSSProperties = {
-  display: "none",
-};
+  hiddenInput: {
+    display: "none",
+  } as React.CSSProperties,
 
-const formFieldStyle: React.CSSProperties = {
-  marginBottom: "20px",
-};
+  formField: {
+    marginBottom: "20px",
+  } as React.CSSProperties,
 
-const labelStyle: React.CSSProperties = {
-  display: "block",
-  fontSize: "14px",
-  fontWeight: "500",
-  color: "#333333",
-  marginBottom: "8px",
-  lineHeight: "1.4",
-};
+  label: {
+    display: "block",
+    fontSize: "14px",
+    fontWeight: "500",
+    color: "#333333",
+    marginBottom: "8px",
+    lineHeight: "1.4",
+  } as React.CSSProperties,
 
-const requiredAsteriskStyle: React.CSSProperties = {
-  color: "#d32f2f",
-  marginLeft: "2px",
-};
+  requiredAsterisk: {
+    color: "#d32f2f",
+    marginLeft: "2px",
+  } as React.CSSProperties,
 
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "8px 12px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-};
+  input: {
+    width: "100%",
+    padding: "8px 12px",
+    border: "1px solid #e0e0e0",
+    borderRadius: "4px",
+    fontSize: "14px",
+  } as React.CSSProperties,
 
-const websiteInputContainerStyle: React.CSSProperties = {
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
-};
+  websiteInputContainer: {
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+  } as React.CSSProperties,
 
-const websiteInputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "8px 12px",
-  paddingRight: "32px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-};
+  websiteInput: {
+    width: "100%",
+    padding: "8px 12px",
+    paddingRight: "32px",
+    border: "1px solid #e0e0e0",
+    borderRadius: "4px",
+    fontSize: "14px",
+  } as React.CSSProperties,
 
-const websiteIconStyle: React.CSSProperties = {
-  position: "absolute",
-  right: "12px",
-  top: "50%",
-  transform: "translateY(-50%)",
-  fontSize: "16px",
-  color: "#666",
-  pointerEvents: "none",
-  zIndex: 1,
+  websiteIcon: {
+    position: "absolute",
+    right: "12px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    fontSize: "16px",
+    color: "#666",
+    pointerEvents: "none",
+    zIndex: 1,
+  } as React.CSSProperties,
 };
 
 const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
@@ -135,21 +137,21 @@ const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
   };
 
   return (
-    <div style={formContainerStyle}>
+    <div style={styles.formContainer}>
       {/* Photo Upload Section */}
-      <div style={photoUploadSectionStyle}>
-        <div style={photoUploadContainerStyle}>
-          <div style={photoPlaceholderStyle}>
+      <div style={styles.photoUploadSection}>
+        <div style={styles.photoUploadContainer}>
+          <div style={styles.photoPlaceholder}>
             {data.photo ? (
-              <img src={data.photo} alt="Profile" style={photoImageStyle} />
+              <img src={data.photo} alt="Profile" style={styles.photoImage} />
             ) : (
-              <div style={photoPlaceholderTextStyle}>
+              <div style={styles.photoPlaceholderText}>
                 <span>Upload Photo</span>
               </div>
             )}
           </div>
           <button
-            style={uploadButtonStyle}
+            style={styles.uploadButton}
             onClick={() => document.getElementById("photo-input")?.click()}
           >
             Choose Image
@@ -158,106 +160,106 @@ const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
             id="photo-input"
             type="file"
             accept="image/*"
-            style={hiddenInputStyle}
+            style={styles.hiddenInput}
             onChange={handlePhotoUpload}
           />
         </div>
         {/* Full Name */}
         <div>
-          <div style={formFieldStyle}>
-            <label style={labelStyle}>
-              Full Name <span style={requiredAsteriskStyle}>*</span>
+          <div style={styles.formField}>
+            <label style={styles.label}>
+              Full Name <span style={styles.requiredAsterisk}>*</span>
             </label>
             <input
               type="text"
               value={data.fullName}
               onChange={handleInputChange("fullName")}
               placeholder="jason filler"
-              style={inputStyle}
+              style={styles.input}
             />
           </div>
           {/* Headline */}
-          <div style={formFieldStyle}>
-            <label style={labelStyle}>
-              Headline <span style={requiredAsteriskStyle}>*</span>
+          <div style={styles.formField}>
+            <label style={styles.label}>
+              Headline <span style={styles.requiredAsterisk}>*</span>
             </label>
             <input
               type="text"
               value={data.headline}
               onChange={handleInputChange("headline")}
               placeholder="Senior Manager"
-              style={inputStyle}
+              style={styles.input}
             />
           </div>
         </div>
       </div>
 
       {/* Email */}
-      <div style={formFieldStyle}>
-        <label style={labelStyle}>
-          Email <span style={requiredAsteriskStyle}>*</span>
+      <div style={styles.formField}>
+        <label style={styles.label}>
+          Email <span style={styles.requiredAsterisk}>*</span>
         </label>
         <input
           type="email"
           value={data.email}
           onChange={handleInputChange("email")}
           placeholder="abcn@example.com"
-          style={inputStyle}
+          style={styles.input}
         />
       </div>
 
       {/* Phone */}
-      <div style={formFieldStyle}>
-        <label style={labelStyle}>
-          Phone <span style={requiredAsteriskStyle}>*</span>
+      <div style={styles.formField}>
+        <label style={styles.label}>
+          Phone <span style={styles.requiredAsterisk}>*</span>
         </label>
         <input
           type="tel"
           value={data.phone}
           onChange={handleInputChange("phone")}
           placeholder="+91 1234567890"
-          style={inputStyle}
+          style={styles.input}
         />
       </div>
 
       {/* Website */}
-      <div style={formFieldStyle}>
-        <label style={labelStyle}>Website</label>
-        <div style={websiteInputContainerStyle}>
+      <div style={styles.formField}>
+        <label style={styles.label}>Website</label>
+        <div style={styles.websiteInputContainer}>
           <input
             type="url"
             value={data.website}
             onChange={handleInputChange("website")}
             placeholder="https://example.com"
-            style={websiteInputStyle}
+            style={styles.websiteInput}
           />
-          <span style={websiteIconStyle}>🔗</span>
+          <span style={styles.websiteIcon}>🔗</span>
         </div>
       </div>
 
       {/* LinkedIn */}
-      <div style={formFieldStyle}>
-        <label style={labelStyle}>
-          LinkedIn <span style={requiredAsteriskStyle}>*</span>
+      <div style={styles.formField}>
+        <label style={styles.label}>
+          LinkedIn <span style={styles.requiredAsterisk}>*</span>
         </label>
         <input
           type="url"
           value={data.linkedin}
           onChange={handleInputChange("linkedin")}
           placeholder="https://linkedin.com/in/username"
-          style={inputStyle}
+          style={styles.input}
         />
       </div>
 
       {/* Location */}
-      <div style={formFieldStyle}>
-        <label style={labelStyle}>Location</label>
+      <div style={styles.formField}>
+        <label style={styles.label}>Location</label>
         <input
           type="text"
           value={data.location}
           onChange={handleInputChange("location")}
           placeholder="City, State"
-          style={inputStyle}
+          style={styles.input}
         />
       </div>
     </div>

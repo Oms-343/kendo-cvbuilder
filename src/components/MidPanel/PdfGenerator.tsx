@@ -5,26 +5,29 @@ import type { PdfGeneratorProps } from "../../types";
 import ClassicTemplate from "../RightPanel/CvTemplates/ClassicTemplate";
 import ModernTemplate from "../RightPanel/CvTemplates/ModernTemplate";
 
-const exportAreaStyle: React.CSSProperties = {
-  position: "absolute",
-  top: "10px",
-  right: "10px",
-  zIndex: 10,
-  backgroundColor: "#ffffff",
-  padding: "8px 16px",
-  borderRadius: "8px",
-  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-  border: "1px solid #e0e0e0",
-};
+// Styles - All CSS objects organized in one place
+const styles = {
+  exportArea: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    zIndex: 10,
+    backgroundColor: "#ffffff",
+    padding: "8px 16px",
+    borderRadius: "8px",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+    border: "1px solid #e0e0e0",
+  } as React.CSSProperties,
 
-const buttonStyle: React.CSSProperties = {
-  fontSize: "14px",
-  fontWeight: "500",
-  padding: "8px 16px",
-  backgroundColor: "#6366f1",
-  borderColor: "#6366f1",
-  borderRadius: "6px",
-  color: "#ffffff",
+  button: {
+    fontSize: "14px",
+    fontWeight: "500",
+    padding: "8px 16px",
+    backgroundColor: "#6366f1",
+    borderColor: "#6366f1",
+    borderRadius: "6px",
+    color: "#ffffff",
+  } as React.CSSProperties,
 };
 
 const PdfGenerator: React.FC<PdfGeneratorProps> = ({ cvData, template }) => {
@@ -49,10 +52,10 @@ const PdfGenerator: React.FC<PdfGeneratorProps> = ({ cvData, template }) => {
   return (
     <div style={{ position: "relative" }}>
       {/* Export Button - Positioned relatively to the CV area */}
-      <div style={exportAreaStyle}>
+      <div style={styles.exportArea}>
         <Button
           themeColor="primary"
-          style={buttonStyle}
+          style={styles.button}
           onClick={exportPDFWithComponent}
           icon="file-pdf"
         >

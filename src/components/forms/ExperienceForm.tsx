@@ -2,131 +2,130 @@ import React, { useState } from "react";
 import { Editor, EditorTools } from "@progress/kendo-react-editor";
 import type { ExperienceItem, ExperienceFormProps } from "../../types";
 
-// CSS objects for cleaner code organization
+// Styles - All CSS objects organized in one place
+const styles = {
+  experienceItem: {
+    border: "1px solid #e0e0e0",
+    borderRadius: "8px",
+    marginBottom: "16px",
+    marginTop: "28px",
+    backgroundColor: "#f8f9fa",
+    padding: "16px",
+    boxShadow: "0 1px 3px rgba(0, 0, 0, 0.05)",
+  } as React.CSSProperties,
 
-const experienceItemStyle: React.CSSProperties = {
-  border: "1px solid #e0e0e0",
-  borderRadius: "8px",
-  marginBottom: "16px",
-  marginTop: "28px",
-  backgroundColor: "#f8f9fa",
-  padding: "16px",
-  boxShadow: "0 1px 3px rgba(0, 0, 0, 0.05)",
-};
+  experienceItemHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  } as React.CSSProperties,
 
-const experienceItemHeaderStyle: React.CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "flex-start",
-};
+  experienceContent: {
+    flex: 1,
+  } as React.CSSProperties,
 
-const experienceContentStyle: React.CSSProperties = {
-  flex: 1,
-};
+  experienceTitle: {
+    margin: "0 0 6px 0",
+    fontSize: "18px",
+    fontWeight: "600",
+    color: "#333",
+  } as React.CSSProperties,
 
-const experienceTitleStyle: React.CSSProperties = {
-  margin: "0 0 6px 0",
-  fontSize: "18px",
-  fontWeight: "600",
-  color: "#333",
-};
+  experienceCompany: {
+    margin: "0 0 4px 0",
+    color: "#555",
+    fontSize: "14px",
+    fontWeight: "500",
+  } as React.CSSProperties,
 
-const experienceCompanyStyle: React.CSSProperties = {
-  margin: "0 0 4px 0",
-  color: "#555",
-  fontSize: "14px",
-  fontWeight: "500",
-};
+  removeButton: {
+    background: "none",
+    border: "none",
+    color: "#dc3545",
+    cursor: "pointer",
+    fontSize: "18px",
+    padding: "4px",
+    borderRadius: "4px",
+    transition: "background-color 0.2s ease",
+  } as React.CSSProperties,
 
+  addExperienceSection: {
+    borderRadius: "8px",
+    backgroundColor: "transparent",
+  } as React.CSSProperties,
 
+  addExperienceGrid: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+    marginBottom: "20px",
+  } as React.CSSProperties,
 
-const removeButtonStyle: React.CSSProperties = {
-  background: "none",
-  border: "none",
-  color: "#dc3545",
-  cursor: "pointer",
-  fontSize: "18px",
-  padding: "4px",
-  borderRadius: "4px",
-  transition: "background-color 0.2s ease",
-};
+  dateRow: {
+    display: "flex",
+    gap: "20px",
+  } as React.CSSProperties,
 
-const addExperienceSectionStyle: React.CSSProperties = {
-  borderRadius: "8px",
-  backgroundColor: "transparent",
-};
+  dateField: {
+    flex: 1,
+  } as React.CSSProperties,
 
-const addExperienceGridStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "20px",
-  marginBottom: "20px",
-};
+  formField: {
+    marginBottom: "0",
+  } as React.CSSProperties,
 
-const dateRowStyle: React.CSSProperties = {
-  display: "flex",
-  gap: "20px",
-};
+  label: {
+    display: "block",
+    fontSize: "14px",
+    fontWeight: "500",
+    color: "#333333",
+    marginBottom: "8px",
+    lineHeight: "1.4",
+  } as React.CSSProperties,
 
-const dateFieldStyle: React.CSSProperties = {
-  flex: 1,
-};
+  requiredAsterisk: {
+    color: "#d32f2f",
+    marginLeft: "2px",
+  } as React.CSSProperties,
 
-const formFieldStyle: React.CSSProperties = {
-  marginBottom: "0",
-};
+  input: {
+    width: "100%",
+    padding: "8px 12px",
+    border: "1px solid #e0e0e0",
+    borderRadius: "4px",
+    fontSize: "14px",
+  } as React.CSSProperties,
 
-const labelStyle: React.CSSProperties = {
-  display: "block",
-  fontSize: "14px",
-  fontWeight: "500",
-  color: "#333333",
-  marginBottom: "8px",
-  lineHeight: "1.4",
-};
+  checkboxLabel: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    fontSize: "14px",
+    color: "#333333",
+  } as React.CSSProperties,
 
-const requiredAsteriskStyle: React.CSSProperties = {
-  color: "#d32f2f",
-  marginLeft: "2px",
-};
+  addButton: {
+    padding: "8px 16px",
+    backgroundColor: "#1976d2",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: "500",
+    transition: "background-color 0.2s ease",
+  } as React.CSSProperties,
 
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "8px 12px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-};
-
-const checkboxLabelStyle: React.CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-  fontSize: "14px",
-  color: "#333333",
-};
-
-const addButtonStyle: React.CSSProperties = {
-  padding: "8px 16px",
-  backgroundColor: "#1976d2",
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontSize: "14px",
-  fontWeight: "500",
-  transition: "background-color 0.2s ease",
-};
-
-const disabledInputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "8px 12px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-  backgroundColor: "#f5f5f5",
-  color: "#999",
-  cursor: "not-allowed",
+  disabledInput: {
+    width: "100%",
+    padding: "8px 12px",
+    border: "1px solid #e0e0e0",
+    borderRadius: "4px",
+    fontSize: "14px",
+    backgroundColor: "#f5f5f5",
+    color: "#999",
+    cursor: "not-allowed",
+  } as React.CSSProperties,
 };
 
 const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
@@ -172,12 +171,12 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
   return (
     <div>
       {/* Add New Experience Form */}
-      <div style={addExperienceSectionStyle}>
-        <div style={addExperienceGridStyle}>
+      <div style={styles.addExperienceSection}>
+        <div style={styles.addExperienceGrid}>
           {/* Position */}
-          <div style={formFieldStyle}>
-            <label style={labelStyle}>
-              Position <span style={requiredAsteriskStyle}>*</span>
+          <div style={styles.formField}>
+            <label style={styles.label}>
+              Position <span style={styles.requiredAsterisk}>*</span>
             </label>
             <input
               type="text"
@@ -186,14 +185,14 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
               onChange={(e) =>
                 setNewExperience({ ...newExperience, position: e.target.value })
               }
-              style={inputStyle}
+              style={styles.input}
             />
           </div>
 
           {/* Company */}
-          <div style={formFieldStyle}>
-            <label style={labelStyle}>
-              Company <span style={requiredAsteriskStyle}>*</span>
+          <div style={styles.formField}>
+            <label style={styles.label}>
+              Company <span style={styles.requiredAsterisk}>*</span>
             </label>
             <input
               type="text"
@@ -202,13 +201,13 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
               onChange={(e) =>
                 setNewExperience({ ...newExperience, company: e.target.value })
               }
-              style={inputStyle}
+              style={styles.input}
             />
           </div>
 
           {/* Location */}
-          <div style={formFieldStyle}>
-            <label style={labelStyle}>Location</label>
+          <div style={styles.formField}>
+            <label style={styles.label}>Location</label>
             <input
               type="text"
               placeholder="City, State"
@@ -216,15 +215,15 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
               onChange={(e) =>
                 setNewExperience({ ...newExperience, location: e.target.value })
               }
-              style={inputStyle}
+              style={styles.input}
             />
           </div>
 
           {/* Start Date and End Date in flex row */}
-          <div style={dateRowStyle}>
-            <div style={dateFieldStyle}>
-              <label style={labelStyle}>
-                Start Date <span style={requiredAsteriskStyle}>*</span>
+          <div style={styles.dateRow}>
+            <div style={styles.dateField}>
+              <label style={styles.label}>
+                Start Date <span style={styles.requiredAsterisk}>*</span>
               </label>
               <input
                 type="text"
@@ -236,11 +235,11 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
                     startDate: e.target.value,
                   })
                 }
-                style={inputStyle}
+                style={styles.input}
               />
             </div>
-            <div style={dateFieldStyle}>
-              <label style={labelStyle}>End Date</label>
+            <div style={styles.dateField}>
+              <label style={styles.label}>End Date</label>
               <input
                 type="text"
                 placeholder="Dec 2022"
@@ -252,14 +251,16 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
                   })
                 }
                 disabled={newExperience.current || false}
-                style={newExperience.current ? disabledInputStyle : inputStyle}
+                style={
+                  newExperience.current ? styles.disabledInput : styles.input
+                }
               />
             </div>
           </div>
 
           {/* Currently working checkbox */}
-          <div style={formFieldStyle}>
-            <label style={checkboxLabelStyle}>
+          <div style={styles.formField}>
+            <label style={styles.checkboxLabel}>
               <input
                 type="checkbox"
                 checked={newExperience.current || false}
@@ -276,8 +277,8 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
           </div>
 
           {/* Description */}
-          <div style={formFieldStyle}>
-            <label style={labelStyle}>Job Description</label>
+          <div style={styles.formField}>
+            <label style={styles.label}>Job Description</label>
             <Editor
               value={newExperience.description || ""}
               onChange={(event) =>
@@ -294,22 +295,22 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
             />
           </div>
         </div>
-        <button onClick={handleAddExperience} style={addButtonStyle}>
+        <button onClick={handleAddExperience} style={styles.addButton}>
           Add Experience
         </button>
       </div>
 
       {/* Existing Experience Items */}
       {data.map((experience) => (
-        <div key={experience.id} style={experienceItemStyle}>
-          <div style={experienceItemHeaderStyle}>
-            <div style={experienceContentStyle}>
-              <h4 style={experienceTitleStyle}>{experience.position}</h4>
-              <p style={experienceCompanyStyle}>{experience.company}</p>
+        <div key={experience.id} style={styles.experienceItem}>
+          <div style={styles.experienceItemHeader}>
+            <div style={styles.experienceContent}>
+              <h4 style={styles.experienceTitle}>{experience.position}</h4>
+              <p style={styles.experienceCompany}>{experience.company}</p>
             </div>
             <button
               onClick={() => handleRemoveExperience(experience.id)}
-              style={removeButtonStyle}
+              style={styles.removeButton}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "#f8d7da";
               }}

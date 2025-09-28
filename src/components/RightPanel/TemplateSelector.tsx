@@ -2,122 +2,124 @@ import React from "react";
 import type { TemplateSelectorProps } from "../../types";
 import { templates } from "../../types";
 
-// CSS objects for cleaner code organization
-const containerStyle: React.CSSProperties = {
-  display: "flex",
-  height: "100%",
-  flexDirection: "column",
-};
+// Styles - All CSS objects organized in one place
+const styles = {
+  container: {
+    display: "flex",
+    height: "100%",
+    flexDirection: "column",
+  } as React.CSSProperties,
 
-const headerStyle: React.CSSProperties = {
-  padding: "20px",
-  borderBottom: "1px solid #e5e5e5",
-  backgroundColor: "#ffffff",
-};
+  header: {
+    padding: "20px",
+    borderBottom: "1px solid #e5e5e5",
+    backgroundColor: "#ffffff",
+  } as React.CSSProperties,
 
-const headerTitleStyle: React.CSSProperties = {
-  margin: "0",
-  fontSize: "14px",
-  fontWeight: "600",
-  color: "#333",
-};
+  headerTitle: {
+    margin: "0",
+    fontSize: "14px",
+    fontWeight: "600",
+    color: "#333",
+  } as React.CSSProperties,
 
-const headerDescriptionStyle: React.CSSProperties = {
-  margin: "8px 0 0 0",
-  fontSize: "12px",
-  color: "#666",
-};
+  headerDescription: {
+    margin: "8px 0 0 0",
+    fontSize: "12px",
+    color: "#666",
+  } as React.CSSProperties,
 
-const scrollableAreaStyle: React.CSSProperties = {
-  flex: 1,
-  padding: "20px",
-};
+  scrollableArea: {
+    flex: 1,
+    padding: "20px",
+  } as React.CSSProperties,
 
-const gridStyle: React.CSSProperties = {
-  display: "grid",
-  gridTemplateColumns: "1fr",
-  gap: "16px",
-};
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gap: "16px",
+  } as React.CSSProperties,
 
-const templateCardStyle = (isSelected: boolean): React.CSSProperties => ({
-  cursor: "pointer",
-  overflow: "hidden",
-  borderRadius: "8px",
-  border: `2px solid ${isSelected ? "#1976d2" : "#e5e5e5"}`,
-  backgroundColor: isSelected ? "#f3f8ff" : "#ffffff",
-  transition: "all 0.2s ease",
-});
+  templateCard: (isSelected: boolean): React.CSSProperties => ({
+    cursor: "pointer",
+    overflow: "hidden",
+    borderRadius: "8px",
+    border: `2px solid ${isSelected ? "#1976d2" : "#e5e5e5"}`,
+    backgroundColor: isSelected ? "#f3f8ff" : "#ffffff",
+    transition: "all 0.2s ease",
+  }),
 
-const templatePreviewStyle = (isSelected: boolean): React.CSSProperties => ({
-  position: "relative",
-  aspectRatio: "210/297",
-  width: "100%",
-  backgroundColor: "#ffffff",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  opacity: isSelected ? 1 : 0.8,
-});
+  templatePreview: (isSelected: boolean): React.CSSProperties => ({
+    position: "relative",
+    aspectRatio: "210/297",
+    width: "100%",
+    backgroundColor: "#ffffff",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    opacity: isSelected ? 1 : 0.8,
+  }),
 
-const templatePlaceholderStyle: React.CSSProperties = {
-  width: "100%",
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "#f5f5f5",
-  border: "1px solid #e5e5e5",
-  borderRadius: "4px",
-  fontSize: "12px",
-  color: "#666",
-  textAlign: "center",
-  padding: "10px",
-};
+  templatePlaceholder: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#f5f5f5",
+    border: "1px solid #e5e5e5",
+    borderRadius: "4px",
+    fontSize: "12px",
+    color: "#666",
+    textAlign: "center",
+    padding: "10px",
+  } as React.CSSProperties,
 
-const templateNameStyle: React.CSSProperties = {
-  fontWeight: "500",
-  marginBottom: "8px",
-};
+  templateName: {
+    fontWeight: "500",
+    marginBottom: "8px",
+  } as React.CSSProperties,
 
-const templatePreviewTextStyle: React.CSSProperties = {
-  fontSize: "10px",
-  lineHeight: "1.3",
-};
+  templatePreviewText: {
+    fontSize: "10px",
+    lineHeight: "1.3",
+  } as React.CSSProperties,
 
-const templateInfoStyle: React.CSSProperties = {
-  padding: "12px",
-  backgroundColor: "#ffffff",
-};
+  templateInfo: {
+    padding: "12px",
+    backgroundColor: "#ffffff",
+  } as React.CSSProperties,
 
-const templateInfoTitleStyle: React.CSSProperties = {
-  margin: "0",
-  fontSize: "12px",
-  fontWeight: "500",
-  color: "#333",
-};
+  templateInfoTitle: {
+    margin: "0",
+    fontSize: "12px",
+    fontWeight: "500",
+    color: "#333",
+  } as React.CSSProperties,
 
-const comingSoonOverlayStyle: React.CSSProperties = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: "rgba(255, 255, 255, 0.65)",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  zIndex: 2,
-};
+  comingSoonOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.65)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 2,
+  } as React.CSSProperties,
 
-const comingSoonBadgeStyle: React.CSSProperties = {
-  backgroundColor: "#ff9800",
-  color: "#ffffff",
-  padding: "6px 12px",
-  borderRadius: "16px",
-  fontSize: "11px",
-  fontWeight: "600",
-  textTransform: "uppercase",
-  letterSpacing: "0.5px",
+  comingSoonBadge: {
+    backgroundColor: "#ff9800",
+    color: "#ffffff",
+    padding: "6px 12px",
+    borderRadius: "16px",
+    fontSize: "11px",
+    fontWeight: "600",
+    textTransform: "uppercase",
+    letterSpacing: "0.5px",
+  } as React.CSSProperties,
 };
 
 const TemplateSelector: React.FC<TemplateSelectorProps> = ({
@@ -125,71 +127,75 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   setSelectedTemplate,
 }) => {
   return (
-    <div style={containerStyle}>
-      <div style={headerStyle}>
-        <h3 style={headerTitleStyle}>Template</h3>
-        <p style={headerDescriptionStyle}>Choose a design for your resume</p>
+    <div style={styles.container}>
+      <div style={styles.header}>
+        <h3 style={styles.headerTitle}>Template</h3>
+        <p style={styles.headerDescription}>Choose a design for your resume</p>
       </div>
 
-      <div className="scrollable-area" style={scrollableAreaStyle}>
-        <div style={gridStyle}>
+      <div className="scrollable-area" style={styles.scrollableArea}>
+        <div style={styles.grid}>
           {templates.map((template) => (
             <div
               key={template.id}
-              onClick={() => !template.comingSoon && setSelectedTemplate(template.id)}
+              onClick={() =>
+                !template.comingSoon && setSelectedTemplate(template.id)
+              }
               style={{
-                ...templateCardStyle(selectedTemplate === template.id),
+                ...styles.templateCard(selectedTemplate === template.id),
                 cursor: template.comingSoon ? "default" : "pointer",
                 opacity: template.comingSoon ? 0.95 : 1,
               }}
             >
               <div
                 style={{
-                  ...templatePreviewStyle(selectedTemplate === template.id),
-                  position: "relative"
+                  ...styles.templatePreview(selectedTemplate === template.id),
+                  position: "relative",
                 }}
               >
                 {/* Show actual template image if available, placeholder otherwise */}
                 {template.image ? (
-                  <img 
-                    src={template.image} 
+                  <img
+                    src={template.image}
                     alt={`${template.name} template preview`}
-                    style={{ 
-                      maxWidth: '100%', 
-                      maxHeight: '100%', 
-                      objectFit: 'contain',
-                      display: 'block'
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
+                      display: "block",
                     }}
                   />
                 ) : (
-                  <div style={templatePlaceholderStyle}>
+                  <div style={styles.templatePlaceholder}>
                     <div>
-                      <div style={templateNameStyle}>{template.name}</div>
-                      <div style={templatePreviewTextStyle}>Template Preview</div>
+                      <div style={styles.templateName}>{template.name}</div>
+                      <div style={styles.templatePreviewText}>
+                        Template Preview
+                      </div>
                     </div>
                   </div>
                 )}
-                
+
                 {/* Coming Soon Overlay */}
                 {template.comingSoon && (
-                  <div style={comingSoonOverlayStyle}>
-                    <div style={comingSoonBadgeStyle}>
-                      Coming Soon
-                    </div>
+                  <div style={styles.comingSoonOverlay}>
+                    <div style={styles.comingSoonBadge}>Coming Soon</div>
                   </div>
                 )}
               </div>
 
-              <div style={templateInfoStyle}>
-                <h4 style={templateInfoTitleStyle}>
+              <div style={styles.templateInfo}>
+                <h4 style={styles.templateInfoTitle}>
                   {template.name}
                   {template.comingSoon && (
-                    <span style={{ 
-                      marginLeft: "8px", 
-                      fontSize: "10px", 
-                      color: "#ff9800", 
-                      fontWeight: "normal" 
-                    }}>
+                    <span
+                      style={{
+                        marginLeft: "8px",
+                        fontSize: "10px",
+                        color: "#ff9800",
+                        fontWeight: "normal",
+                      }}
+                    >
                       (Coming Soon)
                     </span>
                   )}

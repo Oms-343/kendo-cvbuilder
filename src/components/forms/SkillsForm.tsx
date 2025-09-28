@@ -1,115 +1,117 @@
 import React, { useState } from "react";
 import type { SkillsFormProps } from "../../types";
 
-// CSS objects for cleaner code organization
-const formContainerStyle: React.CSSProperties = {
-  padding: "20px",
-};
+// Styles - All CSS objects organized in one place
+const styles = {
+  formContainer: {
+    padding: "20px",
+  } as React.CSSProperties,
 
-const skillSectionStyle: React.CSSProperties = {
-  marginBottom: "32px",
-};
+  skillSection: {
+    marginBottom: "32px",
+  } as React.CSSProperties,
 
-const skillTitleStyle: React.CSSProperties = {
-  margin: "0 0 16px 0",
-  fontSize: "16px",
-  fontWeight: "500",
-  color: "#333",
-};
+  skillTitle: {
+    margin: "0 0 16px 0",
+    fontSize: "16px",
+    fontWeight: "500",
+    color: "#333",
+  } as React.CSSProperties,
 
-const skillsDisplayStyle: React.CSSProperties = {
-  display: "flex",
-  flexWrap: "wrap",
-  gap: "8px",
-  marginBottom: "16px",
-};
+  skillsDisplay: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+    marginBottom: "16px",
+  } as React.CSSProperties,
 
-const technicalSkillTagStyle: React.CSSProperties = {
-  background: "#e3f2fd",
-  color: "#1976d2",
-  padding: "4px 8px 4px 12px",
-  borderRadius: "20px",
-  fontSize: "14px",
-  fontWeight: "500",
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-};
+  technicalSkillTag: {
+    background: "#e3f2fd",
+    color: "#1976d2",
+    padding: "4px 8px 4px 12px",
+    borderRadius: "20px",
+    fontSize: "14px",
+    fontWeight: "500",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  } as React.CSSProperties,
 
-const softSkillTagStyle: React.CSSProperties = {
-  background: "#f0f0f0",
-  color: "#666",
-  padding: "4px 8px 4px 12px",
-  borderRadius: "20px",
-  fontSize: "14px",
-  fontWeight: "500",
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-};
+  softSkillTag: {
+    background: "#f0f0f0",
+    color: "#666",
+    padding: "4px 8px 4px 12px",
+    borderRadius: "20px",
+    fontSize: "14px",
+    fontWeight: "500",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  } as React.CSSProperties,
 
-const removeButtonStyle: React.CSSProperties = {
-  background: "none",
-  border: "none",
-  color: "#1976d2",
-  cursor: "pointer",
-  fontSize: "16px",
-  padding: "0",
-  width: "16px",
-  height: "16px",
-  borderRadius: "50%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
+  removeButton: {
+    background: "none",
+    border: "none",
+    color: "#1976d2",
+    cursor: "pointer",
+    fontSize: "16px",
+    padding: "0",
+    width: "16px",
+    height: "16px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  } as React.CSSProperties,
 
-const softRemoveButtonStyle: React.CSSProperties = {
-  background: "none",
-  border: "none",
-  color: "#666",
-  cursor: "pointer",
-  fontSize: "16px",
-  padding: "0",
-  width: "16px",
-  height: "16px",
-  borderRadius: "50%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
+  softRemoveButton: {
+    background: "none",
+    border: "none",
+    color: "#666",
+    cursor: "pointer",
+    fontSize: "16px",
+    padding: "0",
+    width: "16px",
+    height: "16px",
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  } as React.CSSProperties,
 
-const addSkillContainerStyle: React.CSSProperties = {
-  display: "flex",
-  gap: "8px",
-  alignItems: "center",
-};
+  addSkillContainer: {
+    display: "flex",
+    gap: "8px",
+    alignItems: "center",
+  } as React.CSSProperties,
 
-const skillInputStyle: React.CSSProperties = {
-  flex: 1,
-  padding: "8px 12px",
-  border: "1px solid #e0e0e0",
-  borderRadius: "4px",
-  fontSize: "14px",
-};
+  skillInput: {
+    flex: 1,
+    padding: "8px 12px",
+    border: "1px solid #e0e0e0",
+    borderRadius: "4px",
+    fontSize: "14px",
+  } as React.CSSProperties,
 
-const addButtonStyle: React.CSSProperties = {
-  padding: "8px 16px",
-  backgroundColor: "#1976d2",
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontSize: "14px",
-};
+  addButton: {
+    padding: "8px 16px",
+    backgroundColor: "#1976d2",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "14px",
+  } as React.CSSProperties,
 
-const softAddButtonStyle: React.CSSProperties = {
-  padding: "8px 16px",
-  backgroundColor: "#666",
-  color: "white",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer",
-  fontSize: "14px",
+  softAddButton: {
+    padding: "8px 16px",
+    backgroundColor: "#666",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "14px",
+  } as React.CSSProperties,
 };
 
 const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
@@ -157,20 +159,20 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
   };
 
   return (
-    <div style={formContainerStyle}>
+    <div style={styles.formContainer}>
       {/* Technical Skills Section */}
-      <div style={skillSectionStyle}>
-        <h4 style={skillTitleStyle}>Technical Skills</h4>
+      <div style={styles.skillSection}>
+        <h4 style={styles.skillTitle}>Technical Skills</h4>
 
         {/* Technical Skills Display */}
         {data.technical.length > 0 && (
-          <div style={skillsDisplayStyle}>
+          <div style={styles.skillsDisplay}>
             {data.technical.map((skill) => (
-              <span key={skill} style={technicalSkillTagStyle}>
+              <span key={skill} style={styles.technicalSkillTag}>
                 {skill}
                 <button
                   onClick={() => removeTechnicalSkill(skill)}
-                  style={removeButtonStyle}
+                  style={styles.removeButton}
                 >
                   ×
                 </button>
@@ -180,16 +182,16 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
         )}
 
         {/* Add Technical Skill */}
-        <div style={addSkillContainerStyle}>
+        <div style={styles.addSkillContainer}>
           <input
             type="text"
             placeholder="Add technical skill (e.g., JavaScript, Python)"
             value={newTechnicalSkill}
             onChange={(e) => setNewTechnicalSkill(e.target.value)}
             onKeyPress={(e) => handleKeyPress(e, addTechnicalSkill)}
-            style={skillInputStyle}
+            style={styles.skillInput}
           />
-          <button onClick={addTechnicalSkill} style={addButtonStyle}>
+          <button onClick={addTechnicalSkill} style={styles.addButton}>
             Add
           </button>
         </div>
@@ -197,17 +199,17 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
 
       {/* Soft Skills Section */}
       <div>
-        <h4 style={skillTitleStyle}>Soft Skills</h4>
+        <h4 style={styles.skillTitle}>Soft Skills</h4>
 
         {/* Soft Skills Display */}
         {data.soft.length > 0 && (
-          <div style={skillsDisplayStyle}>
+          <div style={styles.skillsDisplay}>
             {data.soft.map((skill) => (
-              <span key={skill} style={softSkillTagStyle}>
+              <span key={skill} style={styles.softSkillTag}>
                 {skill}
                 <button
                   onClick={() => removeSoftSkill(skill)}
-                  style={softRemoveButtonStyle}
+                  style={styles.softRemoveButton}
                 >
                   ×
                 </button>
@@ -217,16 +219,16 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
         )}
 
         {/* Add Soft Skill */}
-        <div style={addSkillContainerStyle}>
+        <div style={styles.addSkillContainer}>
           <input
             type="text"
             placeholder="Add soft skill (e.g., Leadership, Communication)"
             value={newSoftSkill}
             onChange={(e) => setNewSoftSkill(e.target.value)}
             onKeyPress={(e) => handleKeyPress(e, addSoftSkill)}
-            style={skillInputStyle}
+            style={styles.skillInput}
           />
-          <button onClick={addSoftSkill} style={softAddButtonStyle}>
+          <button onClick={addSoftSkill} style={styles.softAddButton}>
             Add
           </button>
         </div>

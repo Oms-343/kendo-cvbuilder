@@ -2,20 +2,21 @@ import React from "react";
 import { Editor, EditorTools } from "@progress/kendo-react-editor";
 import type { SummaryFormProps } from "../../types";
 
-// CSS objects for cleaner code organization
+// Styles - All CSS objects organized in one place
+const styles = {
+  label: {
+    display: "block",
+    fontSize: "16px",
+    fontWeight: "500",
+    marginBottom: "8px",
+    color: "#333",
+  } as React.CSSProperties,
 
-const labelStyle: React.CSSProperties = {
-  display: "block",
-  fontSize: "16px",
-  fontWeight: "500",
-  marginBottom: "8px",
-  color: "#333",
-};
-
-const tipStyle: React.CSSProperties = {
-  fontSize: "12px",
-  color: "#666",
-  marginTop: "8px",
+  tip: {
+    fontSize: "12px",
+    color: "#666",
+    marginTop: "8px",
+  } as React.CSSProperties,
 };
 
 const SummaryForm: React.FC<SummaryFormProps> = ({ data, onUpdate }) => {
@@ -27,7 +28,7 @@ const SummaryForm: React.FC<SummaryFormProps> = ({ data, onUpdate }) => {
 
   return (
     <div>
-      <label style={labelStyle}>Professional Summary</label>
+      <label style={styles.label}>Professional Summary</label>
       <Editor
         value={data.content}
         onChange={handleChange}
@@ -37,7 +38,7 @@ const SummaryForm: React.FC<SummaryFormProps> = ({ data, onUpdate }) => {
           [EditorTools.Link, EditorTools.Unlink],
         ]}
       />
-      <div style={tipStyle}>
+      <div style={styles.tip}>
         Tip: Keep it concise (2-4 sentences) and focus on your most relevant
         qualifications.
       </div>
