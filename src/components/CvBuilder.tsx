@@ -7,7 +7,7 @@ import type {
 import Forms from "./LeftPanel/Forms";
 import SidebarNavigation from "./LeftPanel/SidebarNavigation";
 import TemplateSelector from "./RightPanel/TemplateSelector";
-import PdfGenerator from "./PdfGenerator";
+import PdfGenerator from "./MidPanel/PdfGenerator";
 import type {
   BasicsData,
   SummaryData,

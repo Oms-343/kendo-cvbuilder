@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { PDFExport } from "@progress/kendo-react-pdf";
 import { Button } from "@progress/kendo-react-buttons";
-import type { PdfGeneratorProps } from "../types";
-import ClassicTemplate from "./RightPanel/CvTemplates/ClassicTemplate";
-import ModernTemplate from "./RightPanel/CvTemplates/ModernTemplate";
+import type { PdfGeneratorProps } from "../../types";
+import ClassicTemplate from "../RightPanel/CvTemplates/ClassicTemplate";
+import ModernTemplate from "../RightPanel/CvTemplates/ModernTemplate";
 
 const exportAreaStyle: React.CSSProperties = {
   position: "absolute",

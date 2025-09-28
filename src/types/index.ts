@@ -128,11 +128,6 @@ export interface LanguagesFormProps {
   onUpdate: (languages: string[]) => void;
 }
 
-export interface CvPreviewProps {
-  cvData: CvData;
-  template: string;
-}
-
 export interface PdfGeneratorProps {
   cvData: CvData;
   template: string;
