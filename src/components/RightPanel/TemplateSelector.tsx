@@ -96,6 +96,30 @@ const templateInfoTitleStyle: React.CSSProperties = {
   color: "#333",
 };
 
+const comingSoonOverlayStyle: React.CSSProperties = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: "rgba(255, 255, 255, 0.65)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 2,
+};
+
+const comingSoonBadgeStyle: React.CSSProperties = {
+  backgroundColor: "#ff9800",
+  color: "#ffffff",
+  padding: "6px 12px",
+  borderRadius: "16px",
+  fontSize: "11px",
+  fontWeight: "600",
+  textTransform: "uppercase",
+  letterSpacing: "0.5px",
+};
+
 const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   selectedTemplate,
   setSelectedTemplate,
@@ -112,11 +136,18 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
           {templates.map((template) => (
             <div
               key={template.id}
-              onClick={() => setSelectedTemplate(template.id)}
-              style={templateCardStyle(selectedTemplate === template.id)}
+              onClick={() => !template.comingSoon && setSelectedTemplate(template.id)}
+              style={{
+                ...templateCardStyle(selectedTemplate === template.id),
+                cursor: template.comingSoon ? "default" : "pointer",
+                opacity: template.comingSoon ? 0.95 : 1,
+              }}
             >
               <div
-                style={templatePreviewStyle(selectedTemplate === template.id)}
+                style={{
+                  ...templatePreviewStyle(selectedTemplate === template.id),
+                  position: "relative"
+                }}
               >
                 {/* Show actual template image if available, placeholder otherwise */}
                 {template.image ? (
@@ -138,10 +169,31 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
                     </div>
                   </div>
                 )}
+                
+                {/* Coming Soon Overlay */}
+                {template.comingSoon && (
+                  <div style={comingSoonOverlayStyle}>
+                    <div style={comingSoonBadgeStyle}>
+                      Coming Soon
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div style={templateInfoStyle}>
-                <h4 style={templateInfoTitleStyle}>{template.name}</h4>
+                <h4 style={templateInfoTitleStyle}>
+                  {template.name}
+                  {template.comingSoon && (
+                    <span style={{ 
+                      marginLeft: "8px", 
+                      fontSize: "10px", 
+                      color: "#ff9800", 
+                      fontWeight: "normal" 
+                    }}>
+                      (Coming Soon)
+                    </span>
+                  )}
+                </h4>
               </div>
             </div>
           ))}

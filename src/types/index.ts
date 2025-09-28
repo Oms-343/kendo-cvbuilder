@@ -1,5 +1,8 @@
 import classicTemplateImage from "../assets/classic.png";
 import modernTemplateImage from "../assets/modern.png";
+import cleanTemplateImage from "../assets/clean.png";
+import formalTemplateImage from "../assets/formal.png";
+import corporateTemplateImage from "../assets/corporate.png";
 
 // Data types for the CV
 export interface BasicsData {
@@ -141,6 +144,7 @@ export interface Template {
   name: string;
   description: string;
   image?: string;
+  comingSoon?: boolean;
 }
 
 export interface ClassicTemplateProps {
@@ -171,23 +175,23 @@ export const templates: Template[] = [
     name: "Clean",
     description:
       "A clean and professional design with a single column and table.",
+    image: cleanTemplateImage,
+    comingSoon: true,
   },
   {
     id: "blue",
     name: "Formal",
     description:
       "A single column layout with a clean and professional design blue color.",
+    image: formalTemplateImage,
+    comingSoon: true,
   },
   {
     id: "classicGrey",
     name: "Corporate",
     description:
       "A single column layout with a clean and professional design grey color.",
-  },
-  {
-    id: "modernBlue",
-    name: "Professional",
-    description:
-      "A modern template with a clean and professional design green color.",
+    image: corporateTemplateImage,
+    comingSoon: true,
   },
 ];
