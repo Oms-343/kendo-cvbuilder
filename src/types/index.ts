@@ -1,3 +1,6 @@
+import classicTemplateImage from "../assets/classic.png";
+import modernTemplateImage from "../assets/modern.png";
+
 // Data types for the CV
 export interface BasicsData {
   fullName: string;
@@ -137,6 +140,7 @@ export interface Template {
   id: string;
   name: string;
   description: string;
+  image?: string;
 }
 
 export interface ClassicTemplateProps {
@@ -153,12 +157,14 @@ export const templates: Template[] = [
     name: "Classic",
     description:
       "A simple single column layout for a straightforward presentation",
+    image: classicTemplateImage,
   },
   {
     id: "modern",
     name: "Modern",
     description:
       "A modern template with a clean and professional design with 2 columns.",
+    image: modernTemplateImage,
   },
   {
     id: "clean",
