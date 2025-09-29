@@ -59,26 +59,27 @@ const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
   return (
     <div style={styles.sidebarContainer}>
       {sections.map((section) => (
-        <div key={section.id} style={styles.sectionContainer}>
-          <Tooltip anchorElement="target" position="right">
-            <Button
-              onClick={() => onSectionClick(section.id)}
-              fillMode={activeSection === section.id ? "solid" : "flat"}
-              themeColor={activeSection === section.id ? "primary" : "base"}
-              size="medium"
-              title={section.title}
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "8px",
-                minWidth: "auto",
-                fontSize: "18px",
-              }}
-            >
-              <span style={styles.icon}>{iconMap[section.icon] || "📋"}</span>
-            </Button>
-          </Tooltip>
-        </div>
+        <Tooltip anchorElement="target" position="right">
+          <Button
+            key={section.id}
+            id={`nav-button-${section.id}`}
+            onClick={() => onSectionClick(section.id)}
+            fillMode={activeSection === section.id ? "solid" : "flat"}
+            themeColor={activeSection === section.id ? "primary" : "base"}
+            size="medium"
+            title={section.title}
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "8px",
+              minWidth: "auto",
+              fontSize: "18px",
+              margin: "4px 0",
+            }}
+          >
+            <span style={styles.icon}>{iconMap[section.icon] || "📋"}</span>
+          </Button>
+        </Tooltip>
       ))}
     </div>
   );
