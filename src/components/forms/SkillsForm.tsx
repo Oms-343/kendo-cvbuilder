@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { TextBox } from "@progress/kendo-react-inputs";
+import { Button } from "@progress/kendo-react-buttons";
+import { Label } from "@progress/kendo-react-labels";
 import type { SkillsFormProps } from "../../types";
 
 // Styles - All CSS objects organized in one place
@@ -151,18 +154,11 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
     });
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent, callback: () => void) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      callback();
-    }
-  };
-
   return (
     <div style={styles.formContainer}>
       {/* Technical Skills Section */}
       <div style={styles.skillSection}>
-        <h4 style={styles.skillTitle}>Technical Skills</h4>
+        <Label style={styles.skillTitle}>Technical Skills</Label>
 
         {/* Technical Skills Display */}
         {data.technical.length > 0 && (
@@ -170,12 +166,21 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
             {data.technical.map((skill) => (
               <span key={skill} style={styles.technicalSkillTag}>
                 {skill}
-                <button
+                <Button
                   onClick={() => removeTechnicalSkill(skill)}
-                  style={styles.removeButton}
+                  fillMode="flat"
+                  size="small"
+                  style={{
+                    minWidth: "16px",
+                    width: "16px",
+                    height: "16px",
+                    padding: "0",
+                    marginLeft: "8px",
+                    fontSize: "12px",
+                  }}
                 >
                   ×
-                </button>
+                </Button>
               </span>
             ))}
           </div>
@@ -183,23 +188,27 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
 
         {/* Add Technical Skill */}
         <div style={styles.addSkillContainer}>
-          <input
-            type="text"
+          <TextBox
             placeholder="Add technical skill (e.g., JavaScript, Python)"
             value={newTechnicalSkill}
-            onChange={(e) => setNewTechnicalSkill(e.target.value)}
-            onKeyPress={(e) => handleKeyPress(e, addTechnicalSkill)}
-            style={styles.skillInput}
+            onChange={(e) => setNewTechnicalSkill(String(e.value || ""))}
+            onKeyDown={(e) => e.key === "Enter" && addTechnicalSkill()}
+            style={{ flex: 1 }}
           />
-          <button onClick={addTechnicalSkill} style={styles.addButton}>
+          <Button
+            onClick={addTechnicalSkill}
+            fillMode="solid"
+            themeColor="primary"
+            size="medium"
+          >
             Add
-          </button>
+          </Button>
         </div>
       </div>
 
       {/* Soft Skills Section */}
       <div>
-        <h4 style={styles.skillTitle}>Soft Skills</h4>
+        <Label style={styles.skillTitle}>Soft Skills</Label>
 
         {/* Soft Skills Display */}
         {data.soft.length > 0 && (
@@ -207,12 +216,21 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
             {data.soft.map((skill) => (
               <span key={skill} style={styles.softSkillTag}>
                 {skill}
-                <button
+                <Button
                   onClick={() => removeSoftSkill(skill)}
-                  style={styles.softRemoveButton}
+                  fillMode="flat"
+                  size="small"
+                  style={{
+                    minWidth: "16px",
+                    width: "16px",
+                    height: "16px",
+                    padding: "0",
+                    marginLeft: "8px",
+                    fontSize: "12px",
+                  }}
                 >
                   ×
-                </button>
+                </Button>
               </span>
             ))}
           </div>
@@ -220,17 +238,21 @@ const SkillsForm: React.FC<SkillsFormProps> = ({ data, onUpdate }) => {
 
         {/* Add Soft Skill */}
         <div style={styles.addSkillContainer}>
-          <input
-            type="text"
+          <TextBox
             placeholder="Add soft skill (e.g., Leadership, Communication)"
             value={newSoftSkill}
-            onChange={(e) => setNewSoftSkill(e.target.value)}
-            onKeyPress={(e) => handleKeyPress(e, addSoftSkill)}
-            style={styles.skillInput}
+            onChange={(e) => setNewSoftSkill(String(e.value || ""))}
+            onKeyDown={(e) => e.key === "Enter" && addSoftSkill()}
+            style={{ flex: 1 }}
           />
-          <button onClick={addSoftSkill} style={styles.softAddButton}>
+          <Button
+            onClick={addSoftSkill}
+            fillMode="solid"
+            themeColor="primary"
+            size="medium"
+          >
             Add
-          </button>
+          </Button>
         </div>
       </div>
     </div>

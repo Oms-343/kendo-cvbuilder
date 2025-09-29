@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { TextBox } from "@progress/kendo-react-inputs";
+import { DatePicker } from "@progress/kendo-react-dateinputs";
+import { Button } from "@progress/kendo-react-buttons";
+import { Label } from "@progress/kendo-react-labels";
 import type { EducationItem, EducationFormProps } from "../../types";
 
 // Styles - All CSS objects organized in one place
@@ -116,6 +120,7 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
     year: "",
     score: "",
   });
+  const [graduationDate, setGraduationDate] = useState<Date | null>(null);
 
   const handleAddEducation = () => {
     if (newEducation.course && newEducation.institution) {
@@ -124,7 +129,7 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
         course: newEducation.course || "",
         institution: newEducation.institution || "",
         location: newEducation.location || "",
-        year: newEducation.year || "",
+        year: graduationDate ? graduationDate.getFullYear().toString() : "",
         score: newEducation.score || "",
       };
       onUpdate([...data, education]);
@@ -135,6 +140,7 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
         year: "",
         score: "",
       });
+      setGraduationDate(null);
     }
   };
 
@@ -149,86 +155,94 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
         <div style={styles.addEducationGrid}>
           {/* School/University */}
           <div style={styles.formField}>
-            <label style={styles.label}>
+            <Label>
               School/University <span style={styles.requiredAsterisk}>*</span>
-            </label>
-            <input
-              type="text"
+            </Label>
+            <TextBox
               placeholder="School/University Name"
               value={newEducation.institution || ""}
               onChange={(e) =>
                 setNewEducation({
                   ...newEducation,
-                  institution: e.target.value,
+                  institution: String(e.value || ""),
                 })
               }
-              style={styles.input}
+              style={{ width: "100%" }}
             />
           </div>
 
           {/* Location */}
           <div style={styles.formField}>
-            <label style={styles.label}>Location</label>
-            <input
-              type="text"
+            <Label>Location</Label>
+            <TextBox
               placeholder="City, State"
               value={newEducation.location || ""}
               onChange={(e) =>
-                setNewEducation({ ...newEducation, location: e.target.value })
+                setNewEducation({
+                  ...newEducation,
+                  location: String(e.value || ""),
+                })
               }
-              style={styles.input}
+              style={{ width: "100%" }}
             />
           </div>
 
           {/* Degree */}
           <div style={styles.formField}>
-            <label style={styles.label}>
+            <Label>
               Degree <span style={styles.requiredAsterisk}>*</span>
-            </label>
-            <input
-              type="text"
+            </Label>
+            <TextBox
               placeholder="Bachelor of Science"
               value={newEducation.course || ""}
               onChange={(e) =>
-                setNewEducation({ ...newEducation, course: e.target.value })
+                setNewEducation({
+                  ...newEducation,
+                  course: String(e.value || ""),
+                })
               }
-              style={styles.input}
+              style={{ width: "100%" }}
             />
           </div>
 
           {/* Graduation Year and GPA/Score in flex row */}
           <div style={styles.graduationRow}>
             <div style={styles.graduationField}>
-              <label style={styles.label}>
+              <Label>
                 Graduation Year <span style={styles.requiredAsterisk}>*</span>
-              </label>
-              <input
-                type="text"
-                placeholder="2020"
-                value={newEducation.year || ""}
-                onChange={(e) =>
-                  setNewEducation({ ...newEducation, year: e.target.value })
-                }
-                style={styles.input}
+              </Label>
+              <DatePicker
+                placeholder="Select graduation year"
+                value={graduationDate}
+                onChange={(e) => setGraduationDate(e.value)}
+                format="yyyy"
+                style={{ width: "100%" }}
               />
             </div>
             <div style={styles.graduationField}>
-              <label style={styles.label}>GPA/Score</label>
-              <input
-                type="text"
+              <Label>GPA/Score</Label>
+              <TextBox
                 placeholder="score in GPA or %"
                 value={newEducation.score || ""}
                 onChange={(e) =>
-                  setNewEducation({ ...newEducation, score: e.target.value })
+                  setNewEducation({
+                    ...newEducation,
+                    score: String(e.value || ""),
+                  })
                 }
-                style={styles.input}
+                style={{ width: "100%" }}
               />
             </div>
           </div>
         </div>
-        <button onClick={handleAddEducation} style={styles.addButton}>
+        <Button
+          onClick={handleAddEducation}
+          fillMode="solid"
+          themeColor="primary"
+          size="medium"
+        >
           Add Education
-        </button>
+        </Button>
       </div>
       {/* Existing Education Items */}
       {data.map((education) => (
@@ -238,18 +252,15 @@ const EducationForm: React.FC<EducationFormProps> = ({ data, onUpdate }) => {
               <h4 style={styles.educationTitle}>{education.course}</h4>
               <p style={styles.educationInstitution}>{education.institution}</p>
             </div>
-            <button
+            <Button
               onClick={() => handleRemoveEducation(education.id)}
-              style={styles.removeButton}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#f8d7da";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-              }}
+              fillMode="flat"
+              themeColor="error"
+              size="small"
+              style={{ minWidth: "32px", width: "32px", height: "32px" }}
             >
               ×
-            </button>
+            </Button>
           </div>
         </div>
       ))}

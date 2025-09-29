@@ -23,8 +23,6 @@ const styles = {
     fontSize: "14px",
     fontWeight: "500",
     padding: "8px 16px",
-    backgroundColor: "#6366f1",
-    borderColor: "#6366f1",
     borderRadius: "6px",
     color: "#ffffff",
   } as React.CSSProperties,

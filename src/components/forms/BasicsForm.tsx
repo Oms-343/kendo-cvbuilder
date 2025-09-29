@@ -1,4 +1,7 @@
 import React from "react";
+import { TextBox, MaskedTextBox } from "@progress/kendo-react-inputs";
+import { Button } from "@progress/kendo-react-buttons";
+import { Label } from "@progress/kendo-react-labels";
 import type { BasicsData, BasicsFormProps } from "../../types";
 
 // Styles - All CSS objects organized in one place
@@ -150,12 +153,14 @@ const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
               </div>
             )}
           </div>
-          <button
-            style={styles.uploadButton}
+          <Button
+            fillMode="solid"
+            themeColor="primary"
+            size="small"
             onClick={() => document.getElementById("photo-input")?.click()}
           >
             Choose Image
-          </button>
+          </Button>
           <input
             id="photo-input"
             type="file"
@@ -167,28 +172,26 @@ const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
         {/* Full Name */}
         <div>
           <div style={styles.formField}>
-            <label style={styles.label}>
+            <Label>
               Full Name <span style={styles.requiredAsterisk}>*</span>
-            </label>
-            <input
-              type="text"
+            </Label>
+            <TextBox
               value={data.fullName}
               onChange={handleInputChange("fullName")}
               placeholder="jason filler"
-              style={styles.input}
+              style={{ width: "100%" }}
             />
           </div>
           {/* Headline */}
           <div style={styles.formField}>
-            <label style={styles.label}>
+            <Label>
               Headline <span style={styles.requiredAsterisk}>*</span>
-            </label>
-            <input
-              type="text"
+            </Label>
+            <TextBox
               value={data.headline}
               onChange={handleInputChange("headline")}
               placeholder="Senior Manager"
-              style={styles.input}
+              style={{ width: "100%" }}
             />
           </div>
         </div>
@@ -196,70 +199,67 @@ const BasicsForm: React.FC<BasicsFormProps> = ({ data, onUpdate }) => {
 
       {/* Email */}
       <div style={styles.formField}>
-        <label style={styles.label}>
+        <Label>
           Email <span style={styles.requiredAsterisk}>*</span>
-        </label>
-        <input
+        </Label>
+        <TextBox
           type="email"
           value={data.email}
           onChange={handleInputChange("email")}
           placeholder="abcn@example.com"
-          style={styles.input}
+          style={{ width: "100%" }}
         />
       </div>
 
       {/* Phone */}
       <div style={styles.formField}>
-        <label style={styles.label}>
+        <Label>
           Phone <span style={styles.requiredAsterisk}>*</span>
-        </label>
-        <input
-          type="tel"
+        </Label>
+        <MaskedTextBox
+          mask="+00 0000000000"
           value={data.phone}
           onChange={handleInputChange("phone")}
           placeholder="+91 1234567890"
-          style={styles.input}
+          style={{ width: "100%" }}
         />
       </div>
 
       {/* Website */}
       <div style={styles.formField}>
-        <label style={styles.label}>Website</label>
-        <div style={styles.websiteInputContainer}>
-          <input
-            type="url"
-            value={data.website}
-            onChange={handleInputChange("website")}
-            placeholder="https://example.com"
-            style={styles.websiteInput}
-          />
-          <span style={styles.websiteIcon}>🔗</span>
-        </div>
+        <Label>Website</Label>
+        <TextBox
+          type="url"
+          value={data.website}
+          onChange={handleInputChange("website")}
+          placeholder="https://example.com"
+          suffix={<span>🔗</span>}
+          style={{ width: "100%" }}
+        />
       </div>
 
       {/* LinkedIn */}
       <div style={styles.formField}>
-        <label style={styles.label}>
+        <Label>
           LinkedIn <span style={styles.requiredAsterisk}>*</span>
-        </label>
-        <input
+        </Label>
+        <TextBox
           type="url"
           value={data.linkedin}
           onChange={handleInputChange("linkedin")}
           placeholder="https://linkedin.com/in/username"
-          style={styles.input}
+          style={{ width: "100%" }}
         />
       </div>
 
       {/* Location */}
       <div style={styles.formField}>
-        <label style={styles.label}>Location</label>
-        <input
-          type="text"
+        <Label>Location</Label>
+        <TextBox
           value={data.location}
           onChange={handleInputChange("location")}
           placeholder="City, State"
-          style={styles.input}
+          style={{ width: "100%" }}
         />
       </div>
     </div>

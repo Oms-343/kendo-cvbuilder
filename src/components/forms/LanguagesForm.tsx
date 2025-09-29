@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { TextBox } from "@progress/kendo-react-inputs";
+import { Button } from "@progress/kendo-react-buttons";
+import { Label } from "@progress/kendo-react-labels";
 import type { LanguagesFormProps } from "../../types";
 
 // Styles - All CSS objects organized in one place
@@ -91,18 +94,11 @@ const LanguagesForm: React.FC<LanguagesFormProps> = ({ data, onUpdate }) => {
     onUpdate(data.filter((language) => language !== languageToRemove));
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent, callback: () => void) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      callback();
-    }
-  };
-
   return (
     <div style={styles.formContainer}>
       {/* Languages Section */}
       <div style={styles.languagesSection}>
-        <h4 style={styles.languagesTitle}>Languages</h4>
+        <Label style={styles.languagesTitle}>Languages</Label>
 
         {/* Languages Display */}
         {data.length > 0 && (
@@ -110,12 +106,21 @@ const LanguagesForm: React.FC<LanguagesFormProps> = ({ data, onUpdate }) => {
             {data.map((language) => (
               <span key={language} style={styles.languageTag}>
                 {language}
-                <button
+                <Button
                   onClick={() => removeLanguage(language)}
-                  style={styles.removeButton}
+                  fillMode="flat"
+                  size="small"
+                  style={{
+                    minWidth: "16px",
+                    width: "16px",
+                    height: "16px",
+                    padding: "0",
+                    marginLeft: "8px",
+                    fontSize: "12px",
+                  }}
                 >
                   ×
-                </button>
+                </Button>
               </span>
             ))}
           </div>
@@ -123,17 +128,21 @@ const LanguagesForm: React.FC<LanguagesFormProps> = ({ data, onUpdate }) => {
 
         {/* Add Language */}
         <div style={styles.addLanguageContainer}>
-          <input
-            type="text"
+          <TextBox
             placeholder="Add language (e.g., English, Spanish, French)"
             value={newLanguage}
-            onChange={(e) => setNewLanguage(e.target.value)}
-            onKeyPress={(e) => handleKeyPress(e, addLanguage)}
-            style={styles.languageInput}
+            onChange={(e) => setNewLanguage(String(e.value || ""))}
+            onKeyDown={(e) => e.key === "Enter" && addLanguage()}
+            style={{ flex: 1 }}
           />
-          <button onClick={addLanguage} style={styles.addButton}>
+          <Button
+            onClick={addLanguage}
+            fillMode="solid"
+            themeColor="primary"
+            size="medium"
+          >
             Add
-          </button>
+          </Button>
         </div>
       </div>
     </div>

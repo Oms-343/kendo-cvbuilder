@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { Editor, EditorTools } from "@progress/kendo-react-editor";
+import { TextBox } from "@progress/kendo-react-inputs";
+import { DatePicker } from "@progress/kendo-react-dateinputs";
+import { Button } from "@progress/kendo-react-buttons";
+import { Checkbox } from "@progress/kendo-react-inputs";
+import { Label } from "@progress/kendo-react-labels";
 import type { ExperienceItem, ExperienceFormProps } from "../../types";
 
 // Styles - All CSS objects organized in one place
@@ -138,6 +143,16 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
     current: false,
     description: "",
   });
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+
+  const formatDateToString = (date: Date | null): string => {
+    if (!date) return "";
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+    });
+  };
 
   const handleAddExperience = () => {
     if (newExperience.position && newExperience.company) {
@@ -146,8 +161,8 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
         position: newExperience.position || "",
         company: newExperience.company || "",
         location: newExperience.location || "",
-        startDate: newExperience.startDate || "",
-        endDate: newExperience.current ? "" : newExperience.endDate || "",
+        startDate: formatDateToString(startDate),
+        endDate: newExperience.current ? "" : formatDateToString(endDate),
         current: newExperience.current || false,
         description: newExperience.description || "",
       };
@@ -161,6 +176,8 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
         current: false,
         description: "",
       });
+      setStartDate(null);
+      setEndDate(null);
     }
   };
 
@@ -175,110 +192,104 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
         <div style={styles.addExperienceGrid}>
           {/* Position */}
           <div style={styles.formField}>
-            <label style={styles.label}>
+            <Label>
               Position <span style={styles.requiredAsterisk}>*</span>
-            </label>
-            <input
-              type="text"
+            </Label>
+            <TextBox
               placeholder="Software Engineer"
               value={newExperience.position || ""}
               onChange={(e) =>
-                setNewExperience({ ...newExperience, position: e.target.value })
+                setNewExperience({
+                  ...newExperience,
+                  position: String(e.value || ""),
+                })
               }
-              style={styles.input}
+              style={{ width: "100%" }}
             />
           </div>
 
           {/* Company */}
           <div style={styles.formField}>
-            <label style={styles.label}>
+            <Label>
               Company <span style={styles.requiredAsterisk}>*</span>
-            </label>
-            <input
-              type="text"
+            </Label>
+            <TextBox
               placeholder="Company Name"
               value={newExperience.company || ""}
               onChange={(e) =>
-                setNewExperience({ ...newExperience, company: e.target.value })
+                setNewExperience({
+                  ...newExperience,
+                  company: String(e.value || ""),
+                })
               }
-              style={styles.input}
+              style={{ width: "100%" }}
             />
           </div>
 
           {/* Location */}
           <div style={styles.formField}>
-            <label style={styles.label}>Location</label>
-            <input
-              type="text"
+            <Label>Location</Label>
+            <TextBox
               placeholder="City, State"
               value={newExperience.location || ""}
               onChange={(e) =>
-                setNewExperience({ ...newExperience, location: e.target.value })
+                setNewExperience({
+                  ...newExperience,
+                  location: String(e.value || ""),
+                })
               }
-              style={styles.input}
+              style={{ width: "100%" }}
             />
           </div>
 
           {/* Start Date and End Date in flex row */}
           <div style={styles.dateRow}>
             <div style={styles.dateField}>
-              <label style={styles.label}>
+              <Label>
                 Start Date <span style={styles.requiredAsterisk}>*</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Jan 2020"
-                value={newExperience.startDate || ""}
-                onChange={(e) =>
-                  setNewExperience({
-                    ...newExperience,
-                    startDate: e.target.value,
-                  })
-                }
-                style={styles.input}
+              </Label>
+              <DatePicker
+                placeholder="Select start date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.value)}
+                format="MMM yyyy"
+                style={{ width: "100%" }}
               />
             </div>
             <div style={styles.dateField}>
-              <label style={styles.label}>End Date</label>
-              <input
-                type="text"
-                placeholder="Dec 2022"
-                value={newExperience.endDate || ""}
-                onChange={(e) =>
-                  setNewExperience({
-                    ...newExperience,
-                    endDate: e.target.value,
-                  })
-                }
+              <Label>End Date</Label>
+              <DatePicker
+                placeholder="Select end date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.value)}
+                format="MMM yyyy"
                 disabled={newExperience.current || false}
-                style={
-                  newExperience.current ? styles.disabledInput : styles.input
-                }
+                style={{ width: "100%" }}
               />
             </div>
           </div>
 
           {/* Currently working checkbox */}
           <div style={styles.formField}>
-            <label style={styles.checkboxLabel}>
-              <input
-                type="checkbox"
-                checked={newExperience.current || false}
-                onChange={(e) =>
-                  setNewExperience({
-                    ...newExperience,
-                    current: e.target.checked,
-                    endDate: e.target.checked ? "" : newExperience.endDate,
-                  })
+            <Checkbox
+              label="Currently working here"
+              checked={newExperience.current || false}
+              onChange={(e) => {
+                setNewExperience({
+                  ...newExperience,
+                  current: e.value,
+                  endDate: e.value ? "" : newExperience.endDate,
+                });
+                if (e.value) {
+                  setEndDate(null);
                 }
-              />
-              Currently working here
-            </label>
+              }}
+            />
           </div>
 
           {/* Description */}
           <div style={styles.formField}>
-            <label style={styles.label}>Job Description</label>
+            <Label>Job Description</Label>
             <Editor
               value={newExperience.description || ""}
               onChange={(event) =>
@@ -295,9 +306,14 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
             />
           </div>
         </div>
-        <button onClick={handleAddExperience} style={styles.addButton}>
+        <Button
+          onClick={handleAddExperience}
+          fillMode="solid"
+          themeColor="primary"
+          size="medium"
+        >
           Add Experience
-        </button>
+        </Button>
       </div>
 
       {/* Existing Experience Items */}
@@ -308,18 +324,15 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onUpdate }) => {
               <h4 style={styles.experienceTitle}>{experience.position}</h4>
               <p style={styles.experienceCompany}>{experience.company}</p>
             </div>
-            <button
+            <Button
               onClick={() => handleRemoveExperience(experience.id)}
-              style={styles.removeButton}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#f8d7da";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-              }}
+              fillMode="flat"
+              themeColor="error"
+              size="small"
+              style={{ minWidth: "32px", width: "32px", height: "32px" }}
             >
               ×
-            </button>
+            </Button>
           </div>
         </div>
       ))}
