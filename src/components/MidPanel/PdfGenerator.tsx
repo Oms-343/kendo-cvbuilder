@@ -2,8 +2,8 @@ import React, { useRef } from "react";
 import { PDFExport } from "@progress/kendo-react-pdf";
 import { Button } from "@progress/kendo-react-buttons";
 import type { PdfGeneratorProps } from "../../types";
-import ClassicTemplate from "../RightPanel/CvTemplates/ClassicTemplate";
-import ModernTemplate from "../RightPanel/CvTemplates/ModernTemplate";
+import ClassicTemplate from "../RightPanel/CvTemplates/ClassicTemplate.tsx";
+import ModernTemplate from "../RightPanel/CvTemplates/ModernTemplate.tsx";
 
 // Styles - All CSS objects organized in one place
 const styles = {

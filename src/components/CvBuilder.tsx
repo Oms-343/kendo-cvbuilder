@@ -4,10 +4,10 @@ import type {
   SplitterOnChangeEvent,
   SplitterPaneProps,
 } from "@progress/kendo-react-layout";
-import Forms from "./LeftPanel/Forms";
-import SidebarNavigation from "./LeftPanel/SidebarNavigation";
-import TemplateSelector from "./RightPanel/TemplateSelector";
-import PdfGenerator from "./MidPanel/PdfGenerator";
+import Forms from "./LeftPanel/Forms.tsx";
+import SidebarNavigation from "./LeftPanel/SidebarNavigation.tsx";
+import TemplateSelector from "./RightPanel/TemplateSelector.tsx";
+import PdfGenerator from "./MidPanel/PdfGenerator.tsx";
 import type {
   BasicsData,
   SummaryData,

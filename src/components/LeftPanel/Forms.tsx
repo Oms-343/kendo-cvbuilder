@@ -1,10 +1,10 @@
 import React from "react";
-import BasicsForm from "../Forms/BasicsForm";
-import SummaryForm from "../Forms/SummaryForm";
-import EducationForm from "../Forms/EducationForm";
-import ExperienceForm from "../Forms/ExperienceForm";
-import SkillsForm from "../Forms/SkillsForm";
-import LanguagesForm from "../Forms/LanguagesForm";
+import BasicsForm from "../Forms/BasicsForm.tsx";
+import SummaryForm from "../Forms/SummaryForm.tsx";
+import EducationForm from "../Forms/EducationForm.tsx";
+import ExperienceForm from "../Forms/ExperienceForm.tsx";
+import SkillsForm from "../Forms/SkillsForm.tsx";
+import LanguagesForm from "../Forms/LanguagesForm.tsx";
 import type { FormsProps } from "../../types";
 
 // Styles - All CSS objects organized in one place
