@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import "@progress/kendo-theme-default/dist/all.css";
+import "@progress/kendo-theme-bootstrap/scss/all.scss";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
