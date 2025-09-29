@@ -357,13 +357,35 @@ const ClassicTemplate: React.FC<ClassicTemplateProps> = ({ cvData }) => {
             {basics.website && (
               <div style={styles.contactItem}>
                 {icons.website}
-                <span>{basics.website}</span>
+                <a
+                  href={
+                    basics.website.startsWith("http")
+                      ? basics.website
+                      : `https://${basics.website}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  <span>Website</span>
+                </a>
               </div>
             )}
             {basics.linkedin && (
               <div style={styles.contactItem}>
                 {icons.linkedin}
-                <span>LinkedIn</span>
+                <a
+                  href={
+                    basics.linkedin.startsWith("http")
+                      ? basics.linkedin
+                      : `https://linkedin.com/in/${basics.linkedin}`
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  <span>LinkedIn</span>
+                </a>
               </div>
             )}
             {basics.location && (
